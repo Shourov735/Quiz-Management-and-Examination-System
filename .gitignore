@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.project
+.classpath
+.settings/
+
+# Database files (runtime)
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# Compiled FXML backup
+*.fxml.bak
