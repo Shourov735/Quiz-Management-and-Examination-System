@@ -1,6 +1,7 @@
 package com.quizapp.repository;
 
 import com.quizapp.database.DatabaseConnection;
+import com.quizapp.model.Difficulty;
 import com.quizapp.model.Quiz;
 import com.quizapp.model.QuizStatus;
 
@@ -29,23 +30,27 @@ public class SQLiteQuizRepository implements QuizRepository {
     // -------------------------------------------------------------------------
 
     private static final String INSERT_QUIZ =
-            "INSERT INTO quizzes (title, description, scoring_strategy, time_limit_seconds, " +
-            "total_marks, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO quizzes (title, description, category_id, difficulty, time_limit_minutes, " +
+            "max_attempts, scoring_strategy, status, created_by, created_at, updated_at, shuffle_questions) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String SELECT_BASE =
+            "SELECT id, title, description, category_id, difficulty, time_limit_minutes, " +
+            "max_attempts, scoring_strategy, status, created_by, created_at, updated_at, shuffle_questions FROM quizzes";
 
     private static final String SELECT_BY_ID =
-            "SELECT id, title, description, scoring_strategy, time_limit_seconds, " +
-            "total_marks, status, created_at, updated_at FROM quizzes WHERE id = ?";
+            SELECT_BASE + " WHERE id = ?";
 
     private static final String SELECT_ALL =
-            "SELECT id, title, description, scoring_strategy, time_limit_seconds, " +
-            "total_marks, status, created_at, updated_at FROM quizzes";
+            SELECT_BASE;
 
     private static final String SELECT_BY_STATUS =
             SELECT_ALL + " WHERE status = ?";
 
     private static final String UPDATE_QUIZ =
-            "UPDATE quizzes SET title = ?, description = ?, scoring_strategy = ?, " +
-            "time_limit_seconds = ?, total_marks = ?, status = ?, updated_at = ? WHERE id = ?";
+            "UPDATE quizzes SET title = ?, description = ?, category_id = ?, difficulty = ?, " +
+            "time_limit_minutes = ?, max_attempts = ?, scoring_strategy = ?, status = ?, " +
+            "created_by = ?, updated_at = ?, shuffle_questions = ? WHERE id = ?";
 
     private static final String DELETE_QUIZ =
             "DELETE FROM quizzes WHERE id = ?";
@@ -80,12 +85,24 @@ public class SQLiteQuizRepository implements QuizRepository {
 
             ps.setString(1, quiz.getTitle());
             ps.setString(2, quiz.getDescription());
-            ps.setString(3, quiz.getScoringStrategy());
-            ps.setInt(4, quiz.getTimeLimitSeconds());
-            ps.setDouble(5, quiz.getTotalMarks());
-            ps.setString(6, quiz.getStatus() != null ? quiz.getStatus().name() : QuizStatus.DRAFT.name());
-            ps.setString(7, quiz.getCreatedAt() != null ? quiz.getCreatedAt().toString() : LocalDateTime.now().toString());
-            ps.setString(8, quiz.getUpdatedAt() != null ? quiz.getUpdatedAt().toString() : LocalDateTime.now().toString());
+            if (quiz.getCategoryId() > 0) {
+                ps.setInt(3, quiz.getCategoryId());
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+            ps.setString(4, quiz.getDifficulty() != null ? quiz.getDifficulty().name() : null);
+            ps.setInt(5, quiz.getTimeLimitMinutes());
+            ps.setInt(6, quiz.getMaxAttempts());
+            ps.setString(7, quiz.getScoringStrategy() != null ? quiz.getScoringStrategy() : "STANDARD");
+            ps.setString(8, quiz.getStatus() != null ? quiz.getStatus().name() : QuizStatus.DRAFT.name());
+            if (quiz.getCreatedBy() > 0) {
+                ps.setInt(9, quiz.getCreatedBy());
+            } else {
+                ps.setNull(9, Types.INTEGER);
+            }
+            ps.setString(10, quiz.getCreatedAt() != null ? quiz.getCreatedAt().toString() : LocalDateTime.now().toString());
+            ps.setString(11, quiz.getUpdatedAt() != null ? quiz.getUpdatedAt().toString() : LocalDateTime.now().toString());
+            ps.setInt(12, quiz.isShuffleQuestions() ? 1 : 0);
 
             int affected = ps.executeUpdate();
             if (affected == 0) {
@@ -254,8 +271,7 @@ public class SQLiteQuizRepository implements QuizRepository {
 
         // Build the WHERE clause dynamically, collecting parameters in order
         StringBuilder sql = new StringBuilder(
-                "SELECT id, title, description, scoring_strategy, time_limit_seconds, " +
-                "total_marks, status, created_at, updated_at FROM quizzes WHERE 1=1");
+                SELECT_BASE + " WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
         if (titleKeyword != null && !titleKeyword.isBlank()) {
@@ -313,12 +329,24 @@ public class SQLiteQuizRepository implements QuizRepository {
 
             ps.setString(1, quiz.getTitle());
             ps.setString(2, quiz.getDescription());
-            ps.setString(3, quiz.getScoringStrategy());
-            ps.setInt(4, quiz.getTimeLimitSeconds());
-            ps.setDouble(5, quiz.getTotalMarks());
-            ps.setString(6, quiz.getStatus() != null ? quiz.getStatus().name() : QuizStatus.DRAFT.name());
-            ps.setString(7, LocalDateTime.now().toString());
-            ps.setInt(8, quiz.getId());
+            if (quiz.getCategoryId() > 0) {
+                ps.setInt(3, quiz.getCategoryId());
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+            ps.setString(4, quiz.getDifficulty() != null ? quiz.getDifficulty().name() : null);
+            ps.setInt(5, quiz.getTimeLimitMinutes());
+            ps.setInt(6, quiz.getMaxAttempts());
+            ps.setString(7, quiz.getScoringStrategy() != null ? quiz.getScoringStrategy() : "STANDARD");
+            ps.setString(8, quiz.getStatus() != null ? quiz.getStatus().name() : QuizStatus.DRAFT.name());
+            if (quiz.getCreatedBy() > 0) {
+                ps.setInt(9, quiz.getCreatedBy());
+            } else {
+                ps.setNull(9, Types.INTEGER);
+            }
+            ps.setString(10, LocalDateTime.now().toString());
+            ps.setInt(11, quiz.isShuffleQuestions() ? 1 : 0);
+            ps.setInt(12, quiz.getId());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -438,9 +466,18 @@ public class SQLiteQuizRepository implements QuizRepository {
         quiz.setId(rs.getInt("id"));
         quiz.setTitle(rs.getString("title"));
         quiz.setDescription(rs.getString("description"));
+        quiz.setCategoryId(rs.getInt("category_id"));
+        String diffStr = rs.getString("difficulty");
+        if (diffStr != null && !diffStr.isBlank()) {
+            try {
+                quiz.setDifficulty(Difficulty.valueOf(diffStr));
+            } catch (IllegalArgumentException ex) {
+                // leave null
+            }
+        }
+        quiz.setTimeLimitMinutes(rs.getInt("time_limit_minutes"));
+        quiz.setMaxAttempts(rs.getInt("max_attempts"));
         quiz.setScoringStrategy(rs.getString("scoring_strategy"));
-        quiz.setTimeLimitSeconds(rs.getInt("time_limit_seconds"));
-        quiz.setTotalMarks(rs.getDouble("total_marks"));
 
         String statusStr = rs.getString("status");
         if (statusStr != null && !statusStr.isBlank()) {
@@ -451,8 +488,10 @@ public class SQLiteQuizRepository implements QuizRepository {
             }
         }
 
+        quiz.setCreatedBy(rs.getInt("created_by"));
         parseAndSetDateTime(rs, "created_at", quiz);
         parseAndSetUpdatedAt(rs, "updated_at", quiz);
+        quiz.setShuffleQuestions(rs.getInt("shuffle_questions") == 1);
 
         return quiz;
     }

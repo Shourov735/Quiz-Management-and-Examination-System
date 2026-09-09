@@ -33,11 +33,11 @@ public class SQLiteQuestionRepository implements QuestionRepository {
     // -------------------------------------------------------------------------
 
     private static final String INSERT_QUESTION =
-            "INSERT INTO questions (question_text, question_type, marks, display_order, quiz_id) " +
-            "VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO questions (question_text, question_type, marks, difficulty, category_id, created_by) " +
+            "VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_QUESTION_BASE =
-            "SELECT id, question_text, question_type, marks, display_order, quiz_id FROM questions";
+            "SELECT id, question_text, question_type, marks, difficulty, category_id, created_by, created_at FROM questions";
 
     private static final String SELECT_BY_ID =
             SELECT_QUESTION_BASE + " WHERE id = ?";
@@ -55,14 +55,14 @@ public class SQLiteQuestionRepository implements QuestionRepository {
             SELECT_QUESTION_BASE + " WHERE created_by = ?";
 
     private static final String SELECT_BY_QUIZ =
-            "SELECT q.id, q.question_text, q.question_type, q.marks, q.display_order, q.quiz_id " +
+            "SELECT q.id, q.question_text, q.question_type, q.marks, q.difficulty, q.category_id, q.created_by, q.created_at, qq.question_order, qq.quiz_id " +
             "FROM questions q " +
             "JOIN quiz_questions qq ON qq.question_id = q.id " +
             "WHERE qq.quiz_id = ? " +
             "ORDER BY qq.question_order ASC";
 
     private static final String UPDATE_QUESTION =
-            "UPDATE questions SET question_text = ?, question_type = ?, marks = ?, display_order = ? WHERE id = ?";
+            "UPDATE questions SET question_text = ?, question_type = ?, marks = ?, difficulty = ?, category_id = ? WHERE id = ?";
 
     private static final String DELETE_QUESTION =
             "DELETE FROM questions WHERE id = ?";
@@ -72,11 +72,11 @@ public class SQLiteQuestionRepository implements QuestionRepository {
     // -------------------------------------------------------------------------
 
     private static final String INSERT_OPTION =
-            "INSERT INTO question_options (question_id, option_text, is_correct, display_order) VALUES (?, ?, ?, ?)";
+            "INSERT INTO question_options (question_id, option_text, is_correct, option_order) VALUES (?, ?, ?, ?)";
 
     private static final String SELECT_OPTIONS =
-            "SELECT id, question_id, option_text, is_correct, display_order FROM question_options " +
-            "WHERE question_id = ? ORDER BY display_order ASC";
+            "SELECT id, question_id, option_text, is_correct, option_order FROM question_options " +
+            "WHERE question_id = ? ORDER BY option_order ASC";
 
     private static final String DELETE_OPTIONS_FOR_QUESTION =
             "DELETE FROM question_options WHERE question_id = ?";
@@ -117,11 +117,16 @@ public class SQLiteQuestionRepository implements QuestionRepository {
             ps.setString(1, question.getQuestionText());
             ps.setString(2, question.getQuestionType() != null ? question.getQuestionType().name() : null);
             ps.setDouble(3, question.getMarks());
-            ps.setInt(4, question.getDisplayOrder());
-            if (question.getQuizId() > 0) {
-                ps.setInt(5, question.getQuizId());
+            ps.setString(4, question.getDifficulty() != null ? question.getDifficulty().name() : null);
+            if (question.getCategoryId() > 0) {
+                ps.setInt(5, question.getCategoryId());
             } else {
                 ps.setNull(5, Types.INTEGER);
+            }
+            if (question.getCreatedBy() > 0) {
+                ps.setInt(6, question.getCreatedBy());
+            } else {
+                ps.setNull(6, Types.INTEGER);
             }
 
             int affected = ps.executeUpdate();
@@ -359,8 +364,13 @@ public class SQLiteQuestionRepository implements QuestionRepository {
                 ps.setString(1, question.getQuestionText());
                 ps.setString(2, question.getQuestionType() != null ? question.getQuestionType().name() : null);
                 ps.setDouble(3, question.getMarks());
-                ps.setInt(4, question.getDisplayOrder());
-                ps.setInt(5, question.getId());
+                ps.setString(4, question.getDifficulty() != null ? question.getDifficulty().name() : null);
+                if (question.getCategoryId() > 0) {
+                    ps.setInt(5, question.getCategoryId());
+                } else {
+                    ps.setNull(5, Types.INTEGER);
+                }
+                ps.setInt(6, question.getId());
                 updated = ps.executeUpdate() > 0;
             }
 
@@ -495,7 +505,7 @@ public class SQLiteQuestionRepository implements QuestionRepository {
                     opt.setQuestionId(rs.getInt("question_id"));
                     opt.setOptionText(rs.getString("option_text"));
                     opt.setCorrect(rs.getInt("is_correct") == 1);
-                    opt.setDisplayOrder(rs.getInt("display_order"));
+                    opt.setOptionOrder(rs.getInt("option_order"));
                     options.add(opt);
                 }
                 q.setOptions(options);
@@ -520,7 +530,7 @@ public class SQLiteQuestionRepository implements QuestionRepository {
                 ps.setInt(1, questionId);
                 ps.setString(2, opt.getOptionText());
                 ps.setInt(3, opt.isCorrect() ? 1 : 0);
-                ps.setInt(4, opt.getDisplayOrder());
+                ps.setInt(4, opt.getOptionOrder() > 0 ? opt.getOptionOrder() : opt.getDisplayOrder());
                 ps.addBatch();
             }
             ps.executeBatch();
