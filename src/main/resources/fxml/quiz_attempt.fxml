@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.QuizAttemptController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label fx:id="quizTitleLabel" text="Examination Title" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="progressLabel" text="Question 1 of 10" style="-fx-text-fill: #ecf0f1; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <Separator orientation="VERTICAL"/>
+            <HBox spacing="8" alignment="CENTER">
+                <Label text="Time Remaining:" style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;"/>
+                <Label fx:id="timerLabel" text="--:--" styleClass="timer-label" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- Left: Question Quick Navigator -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: white; -fx-border-color: #dee2e6; -fx-border-width: 0 1 0 0; -fx-min-width: 170; -fx-pref-width: 170;">
+            <padding>
+                <Insets top="15" right="12" bottom="15" left="12"/>
+            </padding>
+            <Label text="Question Navigator" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-font-size: 12px;"/>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+                <FlowPane fx:id="questionNavPane" hgap="8" vgap="8" prefWrapLength="140"/>
+            </ScrollPane>
+            <VBox spacing="4" style="-fx-padding: 8; -fx-background-color: #f8f9fa; -fx-background-radius: 6;">
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Region style="-fx-min-width: 12; -fx-min-height: 12; -fx-background-color: #27ae60; -fx-background-radius: 3;"/>
+                    <Label text="Answered" style="-fx-font-size: 11px;"/>
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Region style="-fx-min-width: 12; -fx-min-height: 12; -fx-background-color: #3498db; -fx-background-radius: 3;"/>
+                    <Label text="Current" style="-fx-font-size: 11px;"/>
+                </HBox>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Region style="-fx-min-width: 12; -fx-min-height: 12; -fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-radius: 3;"/>
+                    <Label text="Unanswered" style="-fx-font-size: 11px;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Center: Question and Options -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <VBox spacing="20">
+                <padding>
+                    <Insets top="25" right="35" bottom="25" left="35"/>
+                </padding>
+
+                <!-- Question Header Card -->
+                <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label fx:id="questionNumberBadge" text="Q1" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 3 10; -fx-background-radius: 4; -fx-font-weight: bold;"/>
+                        <Label fx:id="questionTypeBadge" text="MULTIPLE CHOICE" style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="questionMarksLabel" text="1.0 Mark" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;"/>
+                    </HBox>
+                    <Separator/>
+                    <Label fx:id="questionTextLabel" text="Question statement goes here..." styleClass="question-text" wrapText="true"/>
+                </VBox>
+
+                <!-- Answer Container (dynamically populated) -->
+                <VBox fx:id="answerContainer" spacing="12" style="-fx-background-color: white; -fx-padding: 22; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                    <Label text="Your Answer:" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- Bottom Action Bar -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: white; -fx-padding: 14 25; -fx-border-color: #dee2e6; -fx-border-width: 1 0 0 0;">
+            <Button fx:id="prevButton" text="← Previous Question" onAction="#handlePrevious" styleClass="button-outline"/>
+            <Button fx:id="nextButton" text="Next Question →" onAction="#handleNext" styleClass="button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="submitButton" text="✓ Submit Examination" onAction="#handleSubmit" styleClass="button-success" style="-fx-font-weight: bold; -fx-padding: 10 24;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

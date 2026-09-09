@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.QuestionManagementController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Back to Dashboard" onAction="#handleBack" styleClass="button-outline" style="-fx-text-fill: white; -fx-border-color: white;"/>
+            <Label text="Question Bank Management" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="+ Create Question" onAction="#handleCreateQuestion" styleClass="button-success"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="16">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+
+            <!-- Search and Filter Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                <TextField fx:id="searchField" promptText="Search question text..." prefWidth="280"/>
+                <ComboBox fx:id="typeFilter" promptText="All Types" prefWidth="170"/>
+                <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="170"/>
+                <ComboBox fx:id="difficultyFilter" promptText="All Difficulties" prefWidth="150"/>
+                <Button text="Search" onAction="#handleSearch" styleClass="button"/>
+                <Button text="Reset" onAction="#handleResetFilter" styleClass="button-secondary"/>
+            </HBox>
+
+            <!-- Questions Table -->
+            <TableView fx:id="questionsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="textColumn" text="Question Text" prefWidth="380"/>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="130"/>
+                    <TableColumn fx:id="marksColumn" text="Marks" prefWidth="70"/>
+                    <TableColumn fx:id="difficultyColumn" text="Difficulty" prefWidth="100"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="No questions match the current filter criteria."/>
+                </placeholder>
+            </TableView>
+
+            <!-- Action Toolbar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="View Options &amp; Correct Answer" onAction="#handleViewDetails" styleClass="button"/>
+                <Button text="Delete Question" onAction="#handleDeleteQuestion" styleClass="button-danger"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

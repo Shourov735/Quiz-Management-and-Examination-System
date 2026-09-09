@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.quizapp.controller.LoginController"
+           style="-fx-background-color: #2c3e50;">
+
+    <VBox alignment="CENTER" maxWidth="440" spacing="20" styleClass="login-panel">
+        <padding>
+            <Insets top="35" right="35" bottom="35" left="35"/>
+        </padding>
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6">
+            <Label text="Quiz Management System" styleClass="login-title" textAlignment="CENTER" wrapText="true"/>
+            <Label text="Design Patterns Examination Portal" styleClass="login-subtitle"/>
+        </VBox>
+
+        <Separator prefWidth="350"/>
+
+        <!-- Form fields -->
+        <VBox spacing="14" alignment="CENTER_LEFT" prefWidth="350">
+            <VBox spacing="4">
+                <Label text="Email Address" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                <TextField fx:id="emailField" promptText="e.g. teacher@quiz.com or student1@quiz.com" prefHeight="38"/>
+            </VBox>
+
+            <VBox spacing="4">
+                <Label text="Password" style="-fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+                <PasswordField fx:id="passwordField" promptText="Enter password" prefHeight="38"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" styleClass="label-error" wrapText="true" minHeight="20"/>
+
+            <Button fx:id="loginButton" text="Sign In" onAction="#handleLogin"
+                    prefWidth="350" prefHeight="42" defaultButton="true"
+                    style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Quick Demo Accounts -->
+        <TitledPane text="Quick Demo Credentials" expanded="false" prefWidth="350">
+            <VBox spacing="6">
+                <Label text="Teacher: teacher@quiz.com / teacher123" style="-fx-font-size: 11px;"/>
+                <Label text="Student: student1@quiz.com / student123" style="-fx-font-size: 11px;"/>
+                <HBox spacing="8" alignment="CENTER">
+                    <Button text="Fill Teacher" onAction="#fillTeacher" styleClass="button-outline" style="-fx-font-size: 11px; -fx-padding: 4 8;"/>
+                    <Button text="Fill Student" onAction="#fillStudent" styleClass="button-outline" style="-fx-font-size: 11px; -fx-padding: 4 8;"/>
+                </HBox>
+            </VBox>
+        </TitledPane>
+
+        <HBox alignment="CENTER" spacing="6">
+            <Label text="Need a new student account?" styleClass="label-muted"/>
+            <Hyperlink text="Register Here" onAction="#handleRegister"/>
+        </HBox>
+    </VBox>
+
+</StackPane>

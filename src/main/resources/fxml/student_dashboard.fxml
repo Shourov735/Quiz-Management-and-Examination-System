@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.StudentDashboardController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label text="Student Examination Portal" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" text="Welcome, Student" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Button text="My Performance" onAction="#handleViewPerformance" styleClass="button-outline" style="-fx-text-fill: white; -fx-border-color: white; -fx-font-size: 12px;"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="button-danger" style="-fx-font-size: 12px;"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="18">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+
+            <!-- Header info -->
+            <VBox spacing="4">
+                <Label text="Available Quizzes &amp; Examinations" styleClass="label-title"/>
+                <Label text="Select an active examination to start your attempt." styleClass="label-muted"/>
+            </VBox>
+
+            <!-- Search and Filter Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                <TextField fx:id="searchField" promptText="Search quiz title..." prefWidth="280"/>
+                <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="170"/>
+                <ComboBox fx:id="difficultyFilter" promptText="All Difficulties" prefWidth="150"/>
+                <Button text="Search" onAction="#handleSearch" styleClass="button"/>
+                <Button text="Reset" onAction="#handleResetFilter" styleClass="button-secondary"/>
+            </HBox>
+
+            <!-- Quizzes Table -->
+            <TableView fx:id="quizzesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="45"/>
+                    <TableColumn fx:id="titleColumn" text="Quiz Title" prefWidth="250"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="130"/>
+                    <TableColumn fx:id="difficultyColumn" text="Difficulty" prefWidth="90"/>
+                    <TableColumn fx:id="timeLimitColumn" text="Time Limit" prefWidth="100"/>
+                    <TableColumn fx:id="attemptsAllowedColumn" text="Allowed Attempts" prefWidth="120"/>
+                    <TableColumn fx:id="attemptsMadeColumn" text="Attempts Made" prefWidth="110"/>
+                    <TableColumn fx:id="strategyColumn" text="Scoring Mode" prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="No published examinations available at this moment."/>
+                </placeholder>
+            </TableView>
+
+            <!-- Action Toolbar -->
+            <HBox spacing="14" alignment="CENTER_LEFT">
+                <Button text="▶ Start Selected Examination" onAction="#handleStartQuiz"
+                        styleClass="button-success" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 24;"/>
+                <Button text="View My Past Attempts" onAction="#handleViewAttempts" styleClass="button-secondary"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

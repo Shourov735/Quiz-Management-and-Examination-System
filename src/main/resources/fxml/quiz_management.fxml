@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.QuizManagementController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Back to Dashboard" onAction="#handleBack" styleClass="button-outline" style="-fx-text-fill: white; -fx-border-color: white;"/>
+            <Label text="Quiz Management &amp; Configuration" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="+ Create Quiz" onAction="#handleCreateQuiz" styleClass="button-success"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="16">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+
+            <!-- Search and Filter Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                <TextField fx:id="searchField" promptText="Search quiz title..." prefWidth="240"/>
+                <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="160"/>
+                <ComboBox fx:id="difficultyFilter" promptText="All Difficulties" prefWidth="140"/>
+                <ComboBox fx:id="statusFilter" promptText="All Statuses" prefWidth="130"/>
+                <Button text="Search" onAction="#handleSearch" styleClass="button"/>
+                <Button text="Reset" onAction="#handleResetFilter" styleClass="button-secondary"/>
+            </HBox>
+
+            <!-- Quizzes Table -->
+            <TableView fx:id="quizzesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="45"/>
+                    <TableColumn fx:id="titleColumn" text="Quiz Title" prefWidth="220"/>
+                    <TableColumn fx:id="categoryColumn" text="Category" prefWidth="130"/>
+                    <TableColumn fx:id="difficultyColumn" text="Difficulty" prefWidth="90"/>
+                    <TableColumn fx:id="timeLimitColumn" text="Time Limit" prefWidth="95"/>
+                    <TableColumn fx:id="maxAttemptsColumn" text="Max Attempts" prefWidth="105"/>
+                    <TableColumn fx:id="strategyColumn" text="Scoring Strategy" prefWidth="140"/>
+                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="110"/>
+                </columns>
+                <placeholder>
+                    <Label text="No quizzes match the search criteria."/>
+                </placeholder>
+            </TableView>
+
+            <!-- Action Toolbar -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 5 0 0 0;">
+                <Button text="Manage Questions in Quiz" onAction="#handleManageQuizQuestions" styleClass="button" style="-fx-font-weight: bold;"/>
+                <Button text="Edit Quiz" onAction="#handleEditQuiz" styleClass="button-secondary"/>
+                <Button text="Delete Quiz" onAction="#handleDeleteQuiz" styleClass="button-danger"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="🚀 Publish Quiz" onAction="#handlePublishQuiz" styleClass="button-success"/>
+                <Button text="↩ Unpublish (Draft)" onAction="#handleUnpublishQuiz" styleClass="button-secondary"/>
+                <Button text="📁 Archive Quiz" onAction="#handleArchiveQuiz" styleClass="button-danger" style="-fx-background-color: #7f8c8d;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
