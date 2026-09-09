@@ -31,20 +31,20 @@ public class AuthenticationServiceTest {
     void setUp() {
         sampleUser = new User();
         sampleUser.setId(1);
-        sampleUser.setName("Alice");
-        sampleUser.setEmail("alice@test.com");
+        sampleUser.setName("Md. Shourov");
+        sampleUser.setEmail("shourov@test.com");
         sampleUser.setPassword("password123");
         sampleUser.setRole(UserRole.STUDENT);
     }
 
     @Test
     void testLoginSuccess() {
-        when(userRepo.findByEmailAndPassword("alice@test.com", "password123"))
+        when(userRepo.findByEmailAndPassword("shourov@test.com", "password123"))
                 .thenReturn(Optional.of(sampleUser));
 
-        Optional<User> result = authService.login("alice@test.com", "password123");
+        Optional<User> result = authService.login("shourov@test.com", "password123");
         assertTrue(result.isPresent());
-        assertEquals("Alice", result.get().getName());
+        assertEquals("Md. Shourov", result.get().getName());
         assertTrue(authService.isLoggedIn());
         assertTrue(authService.isStudent());
         assertFalse(authService.isTeacher());
@@ -52,20 +52,20 @@ public class AuthenticationServiceTest {
 
     @Test
     void testLoginInvalidCredentials() {
-        when(userRepo.findByEmailAndPassword("alice@test.com", "wrongpass"))
+        when(userRepo.findByEmailAndPassword("shourov@test.com", "wrongpass"))
                 .thenReturn(Optional.empty());
 
-        Optional<User> result = authService.login("alice@test.com", "wrongpass");
+        Optional<User> result = authService.login("shourov@test.com", "wrongpass");
         assertTrue(result.isEmpty());
         assertFalse(authService.isLoggedIn());
     }
 
     @Test
     void testLogoutClearsUser() {
-        when(userRepo.findByEmailAndPassword("alice@test.com", "password123"))
+        when(userRepo.findByEmailAndPassword("shourov@test.com", "password123"))
                 .thenReturn(Optional.of(sampleUser));
 
-        authService.login("alice@test.com", "password123");
+        authService.login("shourov@test.com", "password123");
         assertTrue(authService.isLoggedIn());
 
         authService.logout();
@@ -75,21 +75,21 @@ public class AuthenticationServiceTest {
 
     @Test
     void testRegisterNewStudentSuccess() {
-        when(userRepo.emailExists("bob@test.com")).thenReturn(false);
+        when(userRepo.emailExists("rokib@test.com")).thenReturn(false);
         when(userRepo.save(any(User.class))).thenReturn(2);
 
-        User registered = authService.register("Bob", "bob@test.com", "pass123", UserRole.STUDENT);
+        User registered = authService.register("Rokib Hasan", "rokib@test.com", "pass123", UserRole.STUDENT);
         assertNotNull(registered);
         assertEquals(2, registered.getId());
-        assertEquals("Bob", registered.getName());
+        assertEquals("Rokib Hasan", registered.getName());
         verify(userRepo).save(any(User.class));
     }
 
     @Test
     void testRegisterDuplicateEmailThrows() {
-        when(userRepo.emailExists("alice@test.com")).thenReturn(true);
+        when(userRepo.emailExists("shourov@test.com")).thenReturn(true);
 
         assertThrows(IllegalArgumentException.class, () ->
-                authService.register("Alice Clone", "alice@test.com", "pass123", UserRole.STUDENT));
+                authService.register("Shourov Clone", "shourov@test.com", "pass123", UserRole.STUDENT));
     }
 }
