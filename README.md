@@ -616,10 +616,12 @@ quiz-management-system/
 
 # 23. UML and Documentation
 
-The project will maintain documentation in the `docs/` directory:
-* **UML Class Diagrams**: Core domain relationships and design pattern participants (Strategy, State, Factory Method, Observer).
-* **Database ER Diagram**: Entity-relationship diagram detailing entities, attributes, primary keys, foreign keys, and cardinalities.
-* **Design Decision Records**: Written rationale for each pattern covering Problem, Motivation, Solution, Alternatives, Trade-offs, and Future Benefits.
+Comprehensive technical documentation has been generated for academic submission:
+* **Technical Documentation PDF**: [`Quiz_Management_System_Technical_Documentation.pdf`](Quiz_Management_System_Technical_Documentation.pdf) (or [`docs/technical-documentation.pdf`](docs/technical-documentation.pdf))
+* **Technical Documentation HTML**: [`docs/technical-documentation.html`](docs/technical-documentation.html)
+* **UML Class Diagrams**: Core domain relationships and design pattern participants (Strategy, State, Factory Method, Observer) in [`docs/uml/class-diagram.md`](docs/uml/class-diagram.md).
+* **Database ER Diagram**: Entity-relationship diagram detailing entities, attributes, primary keys, foreign keys, and cardinalities in [`docs/er-diagram/database-er.md`](docs/er-diagram/database-er.md).
+* **Design Decision Records**: Written rationale for each pattern covering Problem, Motivation, Solution, Alternatives, Trade-offs, and Future Benefits in [`docs/design-decisions/design-patterns.md`](docs/design-decisions/design-patterns.md).
 
 ---
 
