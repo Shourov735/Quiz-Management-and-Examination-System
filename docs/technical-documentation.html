@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Management & Examination System — Technical Documentation</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+  }
+
+  body {
+    font-family: 'Liberation Sans', 'DejaVu Sans', 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.48;
+    font-size: 9.5pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f172a;
+    font-family: 'Liberation Serif', 'DejaVu Serif', Georgia, serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 17pt;
+    color: #1e3a8a;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 4px;
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 12.5pt;
+    color: #1e3a8a;
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 2px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+    color: #334155;
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 9.5pt;
+    color: #475569;
+    margin-top: 8pt;
+    margin-bottom: 3pt;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5pt;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 5pt;
+    padding-left: 18px;
+  }
+
+  li {
+    margin-bottom: 2.5pt;
+  }
+
+  code {
+    font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+    font-size: 8pt;
+    background-color: #f1f5f9;
+    padding: 1px 3px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+  }
+
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 7px 10px;
+    border-radius: 4px;
+    font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+    font-size: 7.5pt;
+    line-height: 1.35;
+    margin: 5pt 0 8pt 0;
+    page-break-inside: avoid;
+  }
+
+  pre code {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 10pt 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 7px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .cover-page {
+    text-align: center;
+    padding-top: 35px;
+    page-break-after: always;
+  }
+
+  .cover-inst {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+
+  .cover-dept {
+    font-size: 11.5pt;
+    color: #475569;
+    margin-bottom: 25px;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    padding: 5px 16px;
+    border-radius: 16px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-size: 24pt;
+    color: #1e3a8a;
+    font-weight: 800;
+    margin: 15px 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .cover-sub {
+    font-size: 11.5pt;
+    color: #334155;
+    margin-bottom: 25px;
+    font-style: italic;
+  }
+
+  .cover-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 18px auto;
+    max-width: 520px;
+    text-align: left;
+  }
+
+  .cover-box-title {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 3px;
+  }
+
+  .member-item {
+    margin-bottom: 8px;
+  }
+
+  .member-name {
+    font-weight: 700;
+    font-size: 10pt;
+    color: #0f172a;
+  }
+
+  .member-detail {
+    font-size: 8.5pt;
+    color: #64748b;
+  }
+
+  .cover-footer {
+    margin-top: 35px;
+    font-size: 8.5pt;
+    color: #64748b;
+  }
+
+  .callout {
+    background-color: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 5px 10px;
+    margin: 6pt 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 8.5pt;
+  }
+
+  .callout-title {
+    font-weight: 700;
+    color: #15803d;
+    margin-bottom: 2px;
+  }
+
+  .callout-info {
+    background-color: #eff6ff;
+    border-left: 3px solid #2563eb;
+    padding: 5px 10px;
+    margin: 6pt 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 8.5pt;
+  }
+
+  .callout-info .callout-title {
+    color: #1d4ed8;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+
+  .diagram-container {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 8pt 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .diagram-caption {
+    font-size: 8pt;
+    color: #64748b;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .toc-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 10pt 0;
+  }
+
+  .toc-item {
+    margin-bottom: 5pt;
+    border-bottom: 1px dotted #cbd5e1;
+    padding-bottom: 2pt;
+  }
+
+  .toc-title {
+    font-weight: 600;
+    color: #1e3a8a;
+  }
+
+  .badge-tag {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 7pt;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tag-gof { background-color: #dbeafe; color: #1e40af; }
+  .tag-arch { background-color: #fef3c7; color: #92400e; }
+  .tag-db { background-color: #dcfce7; color: #166534; }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <div class="cover-inst">University of Dhaka</div>
+  <div class="cover-dept">Institute of Information Technology (IIT)<br>Bachelor of Science in Software Engineering (BSSE)</div>
+  
+  <div style="height: 10px;"></div>
+  <span class="cover-badge">Design Patterns Theory & Lab Final Project Report</span>
+  
+  <div class="cover-title">Quiz Management &<br>Examination System</div>
+  <div class="cover-sub">Comprehensive Technical Architecture, Design Patterns Justification, and Implementation Documentation</div>
+  
+  <div class="cover-box">
+    <div class="cover-box-title">Project Authors & Contributors</div>
+    <div class="member-item">
+      <div class="member-name">1. Md. Shourov</div>
+      <div class="member-detail">Roll: 1609 &bull; BSSE 16th Batch &bull; IIT, University of Dhaka</div>
+      <div class="member-detail">Email: mdshourov735@gmail.com &bull; GitHub: @Shourov735</div>
+    </div>
+    <div class="member-item" style="margin-top: 8px;">
+      <div class="member-name">2. Md. Rokib Ikbal</div>
+      <div class="member-detail">Roll: 1605 &bull; BSSE 16th Batch &bull; IIT, University of Dhaka</div>
+      <div class="member-detail">Email: bsse1605@iit.du.ac.bd &bull; GitHub: @Rokib1605</div>
+    </div>
+  </div>
+
+  <div class="cover-box" style="margin-top: 10px;">
+    <div class="cover-box-title">Project Specification & Repository</div>
+    <table style="margin: 0; font-size: 8.5pt; border: none;">
+      <tr>
+        <td style="border:none; padding: 2px 4px; font-weight: 600; width: 32%;">Repository URL:</td>
+        <td style="border:none; padding: 2px 4px;"><a href="https://github.com/Shourov735/Quiz-Management-and-Examination-System" style="color:#1d4ed8; text-decoration:none; font-weight: bold;">https://github.com/Shourov735/Quiz-Management-and-Examination-System</a></td>
+      </tr>
+      <tr>
+        <td style="border:none; padding: 2px 4px; font-weight: 600;">Technology Stack:</td>
+        <td style="border:none; padding: 2px 4px;">Java 17, JavaFX 21, SQLite JDBC, JUnit 5, Mockito, Maven</td>
+      </tr>
+      <tr>
+        <td style="border:none; padding: 2px 4px; font-weight: 600;">Design Patterns:</td>
+        <td style="border:none; padding: 2px 4px;">Strategy, State, Factory Method, Observer, Singleton, Repository</td>
+      </tr>
+      <tr>
+        <td style="border:none; padding: 2px 4px; font-weight: 600;">Academic Session:</td>
+        <td style="border:none; padding: 2px 4px;">2025–2026 &bull; BSSE 4th Semester Final Evaluation</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="cover-footer">
+    Institute of Information Technology &bull; University of Dhaka &bull; Dhaka-1000, Bangladesh
+  </div>
+</div>
+
+<!-- TOC & EXECUTIVE SUMMARY -->
+<div class="page-break"></div>
+<h1>Table of Contents</h1>
+
+<ul class="toc-list">
+  <li class="toc-item"><span class="toc-title">1. Executive Summary & Scope Compliance Matrix</span> &mdash; Academic objectives and grading rubric checklist.</li>
+  <li class="toc-item"><span class="toc-title">2. Domain Modeling & System Requirements</span> &mdash; Domain challenges, teacher/student personas, and business invariants.</li>
+  <li class="toc-item"><span class="toc-title">3. Layered System Architecture</span> &mdash; 5-tier architecture, layer boundaries, and cross-cutting utilities.</li>
+  <li class="toc-item"><span class="toc-title">4. In-Depth Design Patterns Evaluation</span> &mdash; Problems, solutions, UML, alternatives, trade-offs, and extensibility.
+    <ul style="margin: 2pt 0 0 12pt; font-size: 8pt; color: #475569;">
+      <li>4.1 Strategy Pattern (Scoring Algorithms)</li>
+      <li>4.2 State Pattern (Quiz Lifecycle Management)</li>
+      <li>4.3 Factory Method Pattern (Polymorphic Questions)</li>
+      <li>4.4 Observer Pattern (Quiz Session Event Bus)</li>
+      <li>4.5 Singleton Pattern (Justified Database Connection)</li>
+      <li>4.6 Repository Pattern (Data Access Decoupling)</li>
+    </ul>
+  </li>
+  <li class="toc-item"><span class="toc-title">5. SOLID Principles & Object-Oriented Design</span> &mdash; Concrete mappings across the application codebase.</li>
+  <li class="toc-item"><span class="toc-title">6. Relational Database Design & Schema</span> &mdash; ER diagram, data dictionary (8 tables), constraints, and seeder.</li>
+  <li class="toc-item"><span class="toc-title">7. JavaFX Presentation Architecture & Screen Inventory</span> &mdash; Controller bindings and 8 UI views.</li>
+  <li class="toc-item"><span class="toc-title">8. Verification, Testing & Quality Assurance</span> &mdash; JUnit 5 & Mockito test suites (60 unit tests, 100% pass).</li>
+  <li class="toc-item"><span class="toc-title">9. Collaborative Git Workflow & Contribution Breakdown</span> &mdash; Feature branches, PR merges, and team member distribution.</li>
+  <li class="toc-item"><span class="toc-title">10. Viva Defense & Demonstration Guide</span> &mdash; Anticipated defense questions and model architectural answers.</li>
+  <li class="toc-item"><span class="toc-title">11. Conclusion & Repository Verification</span> &mdash; Summary of deliverables and official repository metadata.</li>
+</ul>
+
+<div style="height: 6px;"></div>
+
+<h1>1. Executive Summary & Scope Compliance Matrix</h1>
+<p>
+The <strong>Quiz Management & Examination System</strong> is a production-grade desktop application developed in Java as a capstone project for the <strong>Design Patterns Theory & Lab</strong> courses. The project demonstrates the disciplined application of software architecture principles, domain modeling, relational database persistence, automated unit testing, and design patterns.
+</p>
+
+<h2>1.1 Course Guidelines Compliance Matrix</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Guideline Requirement</th>
+      <th style="width: 40%;">Project Implementation Detail</th>
+      <th style="width: 35%;">Repository Proof & Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Team of Two</strong></td>
+      <td>Md. Shourov (Roll: 1609) & Md. Rokib Ikbal (Roll: 1605).</td>
+      <td>Project metadata, Git commit history, and PR merges.</td>
+    </tr>
+    <tr>
+      <td><strong>Java Desktop UI</strong></td>
+      <td>Desktop GUI built with JavaFX 21 controls, declarative FXML layouts, and custom CSS styling.</td>
+      <td><code>src/main/resources/fxml/*.fxml</code><br><code>src/main/resources/css/style.css</code></td>
+    </tr>
+    <tr>
+      <td><strong>Maven Build Tool</strong></td>
+      <td>Apache Maven configuring Java 17, JavaFX plugins, SQLite JDBC, JUnit 5, Mockito, and Shade fat JAR.</td>
+      <td><code>pom.xml</code></td>
+    </tr>
+    <tr>
+      <td><strong>SQLite Persistence</strong></td>
+      <td>Persistent SQLite database with enabled foreign keys (<code>PRAGMA foreign_keys=ON</code>), indexes, and seeder.</td>
+      <td><code>src/main/resources/database/schema.sql</code><br><code>src/main/resources/database/seed.sql</code></td>
+    </tr>
+    <tr>
+      <td><strong>Entities (&ge; 4)</strong></td>
+      <td><strong>8 core entities</strong>: <code>users</code>, <code>categories</code>, <code>quizzes</code>, <code>questions</code>, <code>question_options</code>, <code>quiz_questions</code>, <code>quiz_attempts</code>, <code>answers</code>.</td>
+      <td><code>com.quizapp.model.*</code> (13 model files)</td>
+    </tr>
+    <tr>
+      <td><strong>CRUD Functionality (&ge; 3)</strong></td>
+      <td>Full Create, Read, Update, Delete for <strong>Quizzes</strong>, <strong>Questions</strong>, <strong>Categories</strong>, and <strong>Users</strong>.</td>
+      <td><code>QuizService</code>, <code>QuestionService</code>, <code>CategoryService</code>, <code>AuthenticationService</code></td>
+    </tr>
+    <tr>
+      <td><strong>Multi-step Workflows (&ge; 2)</strong></td>
+      <td><strong>Workflow 1:</strong> Teacher Quiz Creation, Question Assignment & Publication.<br><strong>Workflow 2:</strong> Student Live Timed Examination & Automated Evaluation.<br><strong>Workflow 3:</strong> Quiz Lifecycle State Transition.</td>
+      <td>Controllers: <code>QuizManagementController</code>, <code>QuizAttemptController</code></td>
+    </tr>
+    <tr>
+      <td><strong>Search & Reporting (&ge; 2)</strong></td>
+      <td>Dynamic multi-criteria search (keyword, category, difficulty, status), aggregate exam analytics, and leaderboards.</td>
+      <td><code>ReportingService.java</code><br><code>SQLiteQuizRepository.java</code></td>
+    </tr>
+    <tr>
+      <td><strong>Screens (4–8)</strong></td>
+      <td><strong>8 complete JavaFX screens:</strong> Login, Teacher Dashboard, Quiz Management, Question Bank, Student Dashboard, Quiz Attempt, Results, and Reports.</td>
+      <td><code>src/main/resources/fxml/*.fxml</code> (8 FXMLs)</td>
+    </tr>
+    <tr>
+      <td><strong>Design Patterns</strong></td>
+      <td><strong>4 GoF Patterns:</strong> Strategy, State, Factory Method, Observer + Singleton (Connection) + Repository Pattern.</td>
+      <td><code>com.quizapp.scoring.*</code>, <code>state.*</code>, <code>factory.*</code>, <code>observer.*</code>, <code>repository.*</code></td>
+    </tr>
+    <tr>
+      <td><strong>Automated Testing</strong></td>
+      <td><strong>60 automated unit tests</strong> across scoring, state machine, question validation, and service mocks.</td>
+      <td><code>src/test/java/com/quizapp/*</code> (BUILD SUCCESS)</td>
+    </tr>
+    <tr>
+      <td><strong>Collaborative Git</strong></td>
+      <td>Balanced commits from both members, feature branches (<code>feature/ui-views-and-controllers</code>, <code>feature/unit-testing-suite</code>, <code>feature/architecture-documentation</code>), and merge commits.</td>
+      <td>GitHub commit graph & branch history.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- DOMAIN MODEL & REQUIREMENTS -->
+<div class="page-break"></div>
+<h1>2. Domain Modeling & System Requirements</h1>
+
+<h2>2.1 Domain Analysis & Core Challenges</h2>
+<p>
+The examination domain presents specific architectural challenges that cannot be solved cleanly with procedural code:
+</p>
+<ol>
+  <li><strong>Polymorphic Question Structures:</strong> Examinations combine single-answer MCQs, binary True/False, open-ended Fill-in-the-Blank, and multi-selection Multiple-Answer questions. Each type has different option schemas and validation rules.</li>
+  <li><strong>Pluggable Scoring Policies:</strong> Standard grading uses flat scoring; competitive exams penalize guessing via negative marking; rapid-fire tests award speed bonuses. Hardcoding these in the service layer violates the Open/Closed Principle.</li>
+  <li><strong>Guarded Operational Lifecycles:</strong> A quiz moves from <code>DRAFT</code> to <code>PUBLISHED</code>, <code>ACTIVE</code>, <code>COMPLETED</code>, and <code>ARCHIVED</code>. Actions such as editing questions or initiating student attempts depend strictly on the active state.</li>
+  <li><strong>Session Event Decoupling:</strong> During live examinations, events such as answer submission and timer expiration must trigger UI updates, autosave, and score computation without coupling the examination runner to GUI widgets.</li>
+</ol>
+
+<h2>2.2 Target User Roles & Capabilities</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">User Role</th>
+      <th style="width: 40%;">Primary Capabilities</th>
+      <th style="width: 40%;">Business Boundaries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Teacher</strong></td>
+      <td>
+        <ul>
+          <li>Create, edit, delete, and publish quizzes.</li>
+          <li>Manage questions across 4 question types with options.</li>
+          <li>Configure time limits, attempt limits, and scoring strategies.</li>
+          <li>Inspect attempt statistics, score distributions, and leaderboards.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Cannot take student examination attempts.</li>
+          <li>Cannot modify quiz questions once published/active.</li>
+          <li>Cannot publish quizzes that contain zero questions.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Student</strong></td>
+      <td>
+        <ul>
+          <li>Self-register and authenticate.</li>
+          <li>Browse and filter available published examinations.</li>
+          <li>Participate in timed examinations with live countdown.</li>
+          <li>Submit responses and review instantaneous score breakdowns.</li>
+          <li>View personal attempt history and past performance.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Cannot access teacher dashboards or edit quizzes.</li>
+          <li>Cannot attempt drafts or archived quizzes.</li>
+          <li>Cannot exceed the configured maximum attempt limit.</li>
+          <li>Cannot modify answers after final submission or timeout.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2.3 Core Business Invariants</h2>
+<ul>
+  <li><strong>Publication Invariant:</strong> A quiz cannot transition from <code>DRAFT</code> to <code>PUBLISHED</code> unless it has a non-empty title and at least one question with positive marks.</li>
+  <li><strong>Attempt Eligibility Invariant:</strong> Students can only take exams in <code>PUBLISHED</code> or <code>ACTIVE</code> status, provided completed attempts &lt; <code>max_attempts</code> (where 0 indicates unlimited attempts).</li>
+  <li><strong>Immutability Invariant:</strong> When an attempt reaches <code>SUBMITTED</code> or <code>TIMED_OUT</code>, its recorded answers, duration, and score are permanently sealed.</li>
+</ul>
+
+<!-- ARCHITECTURE -->
+<div class="page-break"></div>
+<h1>3. Layered System Architecture</h1>
+
+<p>
+The application employs an enterprise 5-tier architecture that guarantees strict separation of concerns, high maintainability, and testability.
+</p>
+
+<div class="diagram-container">
+<svg width="600" height="190" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Liberation Sans', sans-serif;">
+  <!-- Presentation Layer -->
+  <rect x="25" y="8" width="550" height="30" rx="4" fill="#1e3a8a" />
+  <text x="300" y="28" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">1. Presentation Layer (JavaFX 21 &bull; 8 FXML Screens &bull; Controllers &bull; CSS Theme)</text>
+  <line x1="300" y1="38" x2="300" y2="45" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Service Layer -->
+  <rect x="25" y="45" width="550" height="30" rx="4" fill="#2563eb" />
+  <text x="300" y="65" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">2. Application Service Layer (Authentication, Quiz, Question, Attempt, Reporting)</text>
+  <line x1="300" y1="75" x2="300" y2="82" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Domain & Patterns Layer -->
+  <rect x="25" y="82" width="550" height="30" rx="4" fill="#0284c7" />
+  <text x="300" y="102" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">3. Domain & Patterns Layer (Models, Scoring Strategy, Quiz State, Factory, Observer)</text>
+  <line x1="300" y1="112" x2="300" y2="119" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Repository Layer -->
+  <rect x="25" y="119" width="550" height="30" rx="4" fill="#0d9488" />
+  <text x="300" y="139" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">4. Persistence & Repository Layer (Interfaces & SQLite JDBC Implementations)</text>
+  <line x1="300" y1="149" x2="300" y2="156" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Database Layer -->
+  <rect x="25" y="156" width="550" height="30" rx="4" fill="#334155" />
+  <text x="300" y="176" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">5. Relational Database Layer (SQLite 3 File Engine &bull; schema.sql &bull; seed.sql)</text>
+</svg>
+<div class="diagram-caption">Figure 3.1: Layered Architecture of the Quiz Management & Examination System.</div>
+</div>
+
+<h2>3.1 Detailed Layer Responsibilities</h2>
+<ul>
+  <li><strong>Presentation Layer:</strong> JavaFX FXML files declare layout hierarchies; controller classes implement <code>Initializable</code>, receive user input, invoke business services, and update JavaFX observable properties. Controllers contain zero business logic and zero SQL statements.</li>
+  <li><strong>Service Layer:</strong> Coordinates transactions and business invariants. Classes (<code>QuizService</code>, <code>AttemptService</code>, etc.) receive repositories via constructor injection, enabling seamless mocking during unit tests.</li>
+  <li><strong>Domain & Patterns Layer:</strong> Rich domain models (<code>Quiz</code>, <code>Question</code>, <code>QuizAttempt</code>) encapsulate their own validation and internal state. Design patterns (Strategy, State, Factory Method, Observer) operate directly in this layer.</li>
+  <li><strong>Repository Layer:</strong> Decouples domain logic from SQL. Repository interfaces define CRUD and query contracts; SQLite implementations use <code>PreparedStatement</code> and try-with-resources to prevent SQL injection and connection leaks.</li>
+  <li><strong>Database Layer:</strong> SQLite embedded relational engine ensuring ACID transactions, foreign key enforcement (<code>PRAGMA foreign_keys = ON</code>), and automated schema setup.</li>
+</ul>
+
+<!-- DESIGN PATTERNS -->
+<div class="page-break"></div>
+<h1>4. In-Depth Design Patterns Evaluation</h1>
+
+<p>
+The project implements four Gang-of-Four (GoF) design patterns plus the Singleton and Repository patterns. Each pattern addresses a specific architectural problem and provides measurable extensibility benefits.
+</p>
+
+<h2>4.1 Strategy Pattern — Scoring Algorithms <span class="badge-tag tag-gof">GoF Behavioral</span></h2>
+
+<h3>Problem Addressed</h3>
+<p>
+Examinations require diverse grading formulas: standard flat marking, negative marking penalties, and time-based bonuses. Embedding these variations in a monolithic evaluation loop using nested <code>if/else</code> statements violates the <strong>Open/Closed Principle (OCP)</strong> and tightly couples scoring logic to attempt orchestration.
+</p>
+
+<h3>Solution & Participants</h3>
+<ul>
+  <li><code>ScoringStrategy</code>: Strategy interface declaring <code>double calculateScore(List&lt;Answer&gt; answers, double totalMarks, int timeLimitSeconds, int timeSpentSeconds)</code>.</li>
+  <li><code>StandardScoring</code>: Sums <code>marksAwarded</code> for all correct answers.</li>
+  <li><code>NegativeMarkingScoring</code>: Deducts a penalty fraction (default 0.25) of the average question mark for each incorrect response, bounded at 0.</li>
+  <li><code>TimeBasedScoring</code>: Awards a 10% bonus for finishing in &lt;50% of the time limit and a 5% bonus for &lt;75%, capped at total marks.</li>
+  <li><code>ScoringStrategyFactory</code>: Dynamically instantiates the requested strategy by name.</li>
+</ul>
+
+<div class="diagram-container">
+<svg width="580" height="110" viewBox="0 0 580 110" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Liberation Sans', sans-serif;">
+  <rect x="210" y="6" width="160" height="38" rx="4" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="290" y="21" fill="#ffffff" font-size="7.5pt" font-style="italic" text-anchor="middle">&lt;&lt;interface&gt;&gt;</text>
+  <text x="290" y="34" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">ScoringStrategy</text>
+  
+  <rect x="20" y="70" width="150" height="32" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="95" y="90" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">StandardScoring</text>
+  
+  <rect x="215" y="70" width="150" height="32" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="290" y="90" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">NegativeMarkingScoring</text>
+  
+  <rect x="410" y="70" width="150" height="32" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="485" y="90" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">TimeBasedScoring</text>
+  
+  <line x1="95" y1="70" x2="250" y2="44" stroke="#475569" stroke-width="1.5" stroke-dasharray="3"/>
+  <line x1="290" y1="70" x2="290" y2="44" stroke="#475569" stroke-width="1.5" stroke-dasharray="3"/>
+  <line x1="485" y1="70" x2="330" y2="44" stroke="#475569" stroke-width="1.5" stroke-dasharray="3"/>
+</svg>
+<div class="diagram-caption">Figure 4.1: Strategy Pattern class structure for modular examination scoring algorithms.</div>
+</div>
+
+<h3>Alternatives Considered & Trade-offs</h3>
+<ul>
+  <li><strong>Inline Switch in Service:</strong> Simpler initially, but violates OCP and requires modifying service code whenever grading policies change. <em>Rejected.</em></li>
+  <li><strong>Subclassing Quiz (e.g. <code>NegativeMarkingQuiz</code>):</strong> Couples quiz behavior to quiz metadata and produces class explosion when combined with timed/shuffled variations. <em>Rejected.</em></li>
+</ul>
+<p>
+<strong>Future Benefit:</strong> Introducing algorithms like <code>PartialCreditScoring</code> or <code>DifficultyWeightedScoring</code> requires only implementing <code>ScoringStrategy</code> without touching <code>AttemptService</code>.
+</p>
+
+<!-- STATE PATTERN -->
+<div class="page-break"></div>
+<h2>4.2 State Pattern — Quiz Lifecycle Governance <span class="badge-tag tag-gof">GoF Behavioral</span></h2>
+
+<h3>Problem Addressed</h3>
+<p>
+A quiz progresses through multiple distinct operational phases: <code>DRAFT</code> &rarr; <code>PUBLISHED</code> &rarr; <code>ACTIVE</code> &rarr; <code>COMPLETED</code> &rarr; <code>ARCHIVED</code>. Allowed actions depend strictly on the active state. Scattering status checks (<code>if (quiz.getStatus() == QuizStatus.DRAFT)</code>) across controllers leads to code duplication and invalid state bugs.
+</p>
+
+<h3>Solution & Participants</h3>
+<ul>
+  <li><code>QuizState</code>: Interface declaring transition operations (<code>publish</code>, <code>unpublish</code>, <code>activate</code>, <code>complete</code>, <code>archive</code>) and capability queries (<code>canBeAttempted()</code>, <code>canBeEdited()</code>, <code>canAddQuestions()</code>).</li>
+  <li><code>DraftState</code>: Permits question editing; transitions to <code>PUBLISHED</code> or <code>ARCHIVED</code>.</li>
+  <li><code>PublishedState</code>: Enables student attempts; locks question editing; transitions to <code>DRAFT</code>, <code>ACTIVE</code>, or <code>ARCHIVED</code>.</li>
+  <li><code>ActiveState</code>: Represents in-session exams; transitions to <code>COMPLETED</code>.</li>
+  <li><code>CompletedState</code>: Closed examination; transitions to <code>ARCHIVED</code>.</li>
+  <li><code>ArchivedState</code>: Terminal state; forbids all state mutations and throws <code>IllegalStateException</code> on invalid actions.</li>
+  <li><code>QuizStateManager</code>: Context maintaining the current state and synchronizing <code>Quiz#status</code>.</li>
+</ul>
+
+<div class="diagram-container">
+<svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Liberation Sans', sans-serif;">
+  <!-- Row 1 -->
+  <rect x="30" y="20" width="130" height="36" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="95" y="42" fill="#92400e" font-size="9pt" font-weight="bold" text-anchor="middle">DRAFT</text>
+
+  <rect x="235" y="20" width="130" height="36" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="300" y="42" fill="#166534" font-size="9pt" font-weight="bold" text-anchor="middle">PUBLISHED</text>
+
+  <rect x="440" y="20" width="130" height="36" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="505" y="42" fill="#1e40af" font-size="9pt" font-weight="bold" text-anchor="middle">ACTIVE</text>
+
+  <!-- Row 2 -->
+  <rect x="440" y="95" width="130" height="36" rx="5" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+  <text x="505" y="117" fill="#6b21a8" font-size="9pt" font-weight="bold" text-anchor="middle">COMPLETED</text>
+
+  <rect x="235" y="95" width="130" height="36" rx="5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="300" y="117" fill="#334155" font-size="9pt" font-weight="bold" text-anchor="middle">ARCHIVED</text>
+
+  <!-- Forward Transition 1 -->
+  <line x1="160" y1="30" x2="235" y2="30" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="197" y="24" fill="#1e3a8a" font-size="7.5pt" font-weight="bold" text-anchor="middle">publish() &rarr;</text>
+
+  <!-- Reverse Transition 1 -->
+  <line x1="235" y1="46" x2="160" y2="46" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="197" y="55" fill="#dc2626" font-size="7.5pt" font-weight="bold" text-anchor="middle">&larr; unpublish()</text>
+
+  <!-- Forward Transition 2 -->
+  <line x1="365" y1="38" x2="440" y2="38" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="402" y="32" fill="#1e3a8a" font-size="7.5pt" font-weight="bold" text-anchor="middle">activate() &rarr;</text>
+
+  <!-- Transition down: ACTIVE to COMPLETED -->
+  <line x1="505" y1="56" x2="505" y2="95" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="545" y="78" fill="#1e3a8a" font-size="7.5pt" font-weight="bold" text-anchor="middle">&darr; complete()</text>
+
+  <!-- Transition left: COMPLETED to ARCHIVED -->
+  <line x1="440" y1="113" x2="365" y2="113" stroke="#1e3a8a" stroke-width="1.5"/>
+  <text x="402" y="107" fill="#1e3a8a" font-size="7.5pt" font-weight="bold" text-anchor="middle">&larr; archive()</text>
+</svg>
+<div class="diagram-caption">Figure 4.2: Finite State Machine governing Quiz lifecycle transitions.</div>
+</div>
+
+<h2>4.3 Factory Method Pattern — Question Polymorphism <span class="badge-tag tag-gof">GoF Creational</span></h2>
+
+<h3>Problem Addressed</h3>
+<p>
+The question bank supports MCQ, True/False, Fill in the Blank, and Multiple Answer questions. Each requires distinct options parsing and answer validation algorithms. Direct instantiation in repository and controller code produces tight coupling to concrete types.
+</p>
+
+<h3>Solution & Participants</h3>
+<ul>
+  <li><code>Question</code> (Abstract Product): Defines core fields and abstract methods <code>validateAnswer(String answer)</code> and <code>getCorrectAnswerDisplay()</code>.</li>
+  <li>Concrete Products: <code>MCQQuestion</code>, <code>TrueFalseQuestion</code>, <code>FillBlankQuestion</code>, <code>MultipleAnswerQuestion</code>.</li>
+  <li><code>QuestionFactory</code> (Creator): Provides <code>createQuestion(QuestionType type)</code> and <code>createFromResultSet(ResultSet rs)</code> to deserialize SQLite rows into polymorphic subclasses based on the <code>question_type</code> column.</li>
+</ul>
+
+<div class="diagram-container">
+<svg width="580" height="110" viewBox="0 0 580 110" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Liberation Sans', sans-serif;">
+  <rect x="20" y="35" width="160" height="40" rx="4" fill="#1e3a8a" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="100" y="52" fill="#ffffff" font-size="8pt" font-style="italic" text-anchor="middle">&lt;&lt;creator&gt;&gt;</text>
+  <text x="100" y="66" fill="#ffffff" font-size="9pt" font-weight="bold" text-anchor="middle">QuestionFactory</text>
+  
+  <line x1="180" y1="55" x2="250" y2="55" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3"/>
+  <text x="215" y="48" fill="#2563eb" font-size="7pt" text-anchor="middle">creates &rarr;</text>
+
+  <rect x="250" y="8" width="130" height="34" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="315" y="29" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">MCQQuestion</text>
+
+  <rect x="400" y="8" width="140" height="34" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="470" y="29" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">TrueFalseQuestion</text>
+
+  <rect x="250" y="68" width="130" height="34" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="315" y="89" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">FillBlankQuestion</text>
+
+  <rect x="400" y="68" width="140" height="34" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="470" y="89" fill="#1e3a8a" font-size="8.5pt" font-weight="bold" text-anchor="middle">MultipleAnswerQuestion</text>
+</svg>
+<div class="diagram-caption">Figure 4.3: Factory Method Pattern generating polymorphic question products.</div>
+</div>
+
+<h2>4.4 Observer Pattern — Quiz Session Events <span class="badge-tag tag-gof">GoF Behavioral</span></h2>
+
+<h3>Problem Addressed</h3>
+<p>
+During examination attempts, session events (answer submitted, timer expired, attempt completed) must notify multiple independent components (progress bar, timer listener, score cache) without coupling the examination runner to GUI controls.
+</p>
+
+<h3>Solution & Participants</h3>
+<ul>
+  <li><code>QuizEventPublisher</code>: Thread-safe subject with <code>subscribe</code>, <code>unsubscribe</code>, and <code>publish</code> guarded by a <code>ReentrantReadWriteLock</code>.</li>
+  <li><code>QuizEvent</code>: Event enum (<code>ATTEMPT_STARTED</code>, <code>ANSWER_SUBMITTED</code>, <code>SCORE_UPDATED</code>, <code>QUIZ_COMPLETED</code>, <code>TIME_EXPIRED</code>).</li>
+  <li><code>QuizEventListener</code>: Observer interface with <code>onEvent(QuizEvent event, Object data)</code>.</li>
+  <li>Concrete Observers: <code>ProgressTracker</code> (computes percentage and running score) and <code>TimerListener</code> (monitors expiration).</li>
+</ul>
+
+<h2>4.5 Singleton Pattern — SQLite Connection Manager <span class="badge-tag tag-gof">GoF Creational</span></h2>
+<p>
+<strong>Academic Justification:</strong> SQLite is an embedded file-based database. Creating multiple uncoordinated connections from concurrent threads results in <code>SQLITE_BUSY</code> lock contention. <code>DatabaseConnection</code> uses thread-safe double-checked locking to serialize write operations, enable <code>PRAGMA foreign_keys = ON</code>, and run schema migrations. Singleton is strictly restricted to this physical resource manager and avoided across all services.
+</p>
+
+<h2>4.6 Repository Pattern — Data Access Decoupling <span class="badge-tag tag-arch">Architectural</span></h2>
+<p>
+Six repository interfaces (<code>UserRepository</code>, <code>QuizRepository</code>, <code>QuestionRepository</code>, <code>QuizAttemptRepository</code>, <code>AnswerRepository</code>, <code>CategoryRepository</code>) abstract SQLite JDBC operations using <code>PreparedStatement</code> and try-with-resources. Services depend on repository abstractions via constructor injection, enabling testing with Mockito.
+</p>
+
+<!-- SOLID PRINCIPLES -->
+<div class="page-break"></div>
+<h1>5. SOLID Principles & Object-Oriented Design</h1>
+
+<p>
+The codebase adheres strictly to all five SOLID design principles:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 28%;">SOLID Principle</th>
+      <th style="width: 36%;">Architectural Implementation</th>
+      <th style="width: 36%;">Concrete Class References</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Single Responsibility (SRP)</strong></td>
+      <td>Each class has one well-defined responsibility: <code>AuthenticationService</code> handles credentials; <code>StandardScoring</code> calculates standard marks; <code>SQLiteQuizRepository</code> handles SQL mapping.</td>
+      <td><code>com.quizapp.service.*</code><br><code>com.quizapp.scoring.*</code><br><code>com.quizapp.repository.*</code></td>
+    </tr>
+    <tr>
+      <td><strong>Open/Closed (OCP)</strong></td>
+      <td>New scoring algorithms, question types, and lifecycle states are introduced by creating new subclasses/implementations without modifying existing evaluation loops or service orchestration.</td>
+      <td><code>ScoringStrategy</code> implementations<br><code>Question</code> polymorphic subclasses<br><code>QuizState</code> implementations</td>
+    </tr>
+    <tr>
+      <td><strong>Liskov Substitution (LSP)</strong></td>
+      <td>All <code>Question</code> subclasses (<code>MCQQuestion</code>, <code>FillBlankQuestion</code>, etc.) can be substituted wherever <code>Question</code> is expected without unexpected behavior or exceptions.</td>
+      <td><code>MCQQuestion</code>, <code>TrueFalseQuestion</code>, <code>FillBlankQuestion</code>, <code>MultipleAnswerQuestion</code></td>
+    </tr>
+    <tr>
+      <td><strong>Interface Segregation (ISP)</strong></td>
+      <td>Clients depend on small, focused interfaces rather than monolithic contracts. <code>ScoringStrategy</code>, <code>QuizEventListener</code>, and <code>QuizState</code> declare only methods needed by their consumers.</td>
+      <td><code>ScoringStrategy.java</code><br><code>QuizEventListener.java</code><br><code>QuizState.java</code></td>
+    </tr>
+    <tr>
+      <td><strong>Dependency Inversion (DIP)</strong></td>
+      <td>High-level modules (<code>QuizService</code>, <code>AttemptService</code>) depend on abstractions (<code>QuizRepository</code>, <code>ScoringStrategy</code>), not concrete SQLite JDBC classes. Repositories are injected via constructors.</td>
+      <td><code>QuizService(QuizRepository, ...)</code><br><code>AttemptService(QuizAttemptRepository, ...)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- DATABASE DESIGN -->
+<div class="page-break"></div>
+<h1>6. Relational Database Design & Schema</h1>
+
+<p>
+The application uses <strong>SQLite 3</strong> as its embedded relational database. The schema adheres to 3rd Normal Form (3NF) and enforces referential integrity through foreign keys.
+</p>
+
+<h2>6.1 Data Dictionary (8 Tables)</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 15%;">Table</th>
+      <th style="width: 25%;">Columns & Data Types</th>
+      <th style="width: 30%;">Keys & Constraints</th>
+      <th style="width: 30%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>users</code></td>
+      <td><code>id (INTEGER)</code>, <code>name (TEXT)</code>, <code>email (TEXT)</code>, <code>password (TEXT)</code>, <code>role (TEXT)</code>, <code>created_at (DATETIME)</code></td>
+      <td>PK: <code>id</code><br><code>email UNIQUE, NOT NULL</code><br><code>role IN ('TEACHER','STUDENT')</code></td>
+      <td>Stores authenticated user accounts and roles.</td>
+    </tr>
+    <tr>
+      <td><code>categories</code></td>
+      <td><code>id (INTEGER)</code>, <code>name (TEXT)</code>, <code>description (TEXT)</code></td>
+      <td>PK: <code>id</code><br><code>name UNIQUE, NOT NULL</code></td>
+      <td>Academic subject domains (e.g. Programming, Database).</td>
+    </tr>
+    <tr>
+      <td><code>quizzes</code></td>
+      <td><code>id (INTEGER)</code>, <code>title (TEXT)</code>, <code>description (TEXT)</code>, <code>category_id (INTEGER)</code>, <code>difficulty (TEXT)</code>, <code>time_limit_minutes (INTEGER)</code>, <code>max_attempts (INTEGER)</code>, <code>scoring_strategy (TEXT)</code>, <code>status (TEXT)</code>, <code>created_by (INTEGER)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>category_id &rarr; categories.id</code><br>FK: <code>created_by &rarr; users.id</code><br><code>status IN ('DRAFT',...)</code></td>
+      <td>Examination configurations, constraints, and lifecycle state.</td>
+    </tr>
+    <tr>
+      <td><code>questions</code></td>
+      <td><code>id (INTEGER)</code>, <code>question_text (TEXT)</code>, <code>question_type (TEXT)</code>, <code>marks (REAL)</code>, <code>difficulty (TEXT)</code>, <code>category_id (INTEGER)</code>, <code>created_by (INTEGER)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>category_id &rarr; categories.id</code><br><code>question_type IN ('MCQ',...)</code></td>
+      <td>Reusable question items in the central question bank.</td>
+    </tr>
+    <tr>
+      <td><code>question_options</code></td>
+      <td><code>id (INTEGER)</code>, <code>question_id (INTEGER)</code>, <code>option_text (TEXT)</code>, <code>is_correct (INTEGER)</code>, <code>option_order (INTEGER)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>question_id &rarr; questions.id</code> (CASCADE)<br><code>is_correct IN (0, 1)</code></td>
+      <td>Selectable choices for MCQs and Multiple Answer items.</td>
+    </tr>
+    <tr>
+      <td><code>quiz_questions</code></td>
+      <td><code>id (INTEGER)</code>, <code>quiz_id (INTEGER)</code>, <code>question_id (INTEGER)</code>, <code>question_order (INTEGER)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>quiz_id &rarr; quizzes.id</code><br>FK: <code>question_id &rarr; questions.id</code><br><code>UNIQUE(quiz_id, question_id)</code></td>
+      <td>M:N junction linking questions to quizzes with custom order.</td>
+    </tr>
+    <tr>
+      <td><code>quiz_attempts</code></td>
+      <td><code>id (INTEGER)</code>, <code>quiz_id (INTEGER)</code>, <code>student_id (INTEGER)</code>, <code>start_time (DATETIME)</code>, <code>end_time (DATETIME)</code>, <code>status (TEXT)</code>, <code>score (REAL)</code>, <code>total_marks (REAL)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>quiz_id &rarr; quizzes.id</code><br>FK: <code>student_id &rarr; users.id</code><br><code>status IN ('IN_PROGRESS',...)</code></td>
+      <td>Individual examination sessions taken by students.</td>
+    </tr>
+    <tr>
+      <td><code>answers</code></td>
+      <td><code>id (INTEGER)</code>, <code>attempt_id (INTEGER)</code>, <code>question_id (INTEGER)</code>, <code>answer_value (TEXT)</code>, <code>is_correct (INTEGER)</code>, <code>marks_awarded (REAL)</code></td>
+      <td>PK: <code>id</code><br>FK: <code>attempt_id &rarr; quiz_attempts.id</code><br>FK: <code>question_id &rarr; questions.id</code><br><code>is_correct IN (0, 1)</code></td>
+      <td>Recorded student responses per attempt and awarded marks.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>6.2 Referential Integrity & Indexes</h2>
+<ul>
+  <li><code>PRAGMA foreign_keys = ON;</code> is executed on every SQLite connection.</li>
+  <li>Indexed columns: <code>quizzes(status)</code>, <code>quizzes(category_id)</code>, <code>questions(question_type)</code>, <code>quiz_attempts(student_id)</code>, <code>quiz_attempts(quiz_id)</code>, <code>answers(attempt_id)</code>.</li>
+</ul>
+
+<!-- JAVAFX SCREENS -->
+<div class="page-break"></div>
+<h1>7. JavaFX Presentation Architecture & Screen Inventory</h1>
+
+<p>
+The application features <strong>8 distinct JavaFX screens</strong> styled with a modern design system (<code>style.css</code>).
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Screen Name</th>
+      <th style="width: 28%;">Controller & FXML</th>
+      <th style="width: 25%;">Primary Components</th>
+      <th style="width: 25%;">Supported User Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Login Screen</strong></td>
+      <td><code>LoginController</code><br><code>login.fxml</code></td>
+      <td>Email/Password fields, role selector, quick-demo buttons.</td>
+      <td>Teacher/Student authentication, student self-registration, validation.</td>
+    </tr>
+    <tr>
+      <td><strong>2. Teacher Dashboard</strong></td>
+      <td><code>TeacherDashboardController</code><br><code>teacher_dashboard.fxml</code></td>
+      <td>4 metric summary cards, recent quizzes table, navigation bar.</td>
+      <td>Overview of total quizzes, published exams, questions, and attempts.</td>
+    </tr>
+    <tr>
+      <td><strong>3. Quiz Management</strong></td>
+      <td><code>QuizManagementController</code><br><code>quiz_management.fxml</code></td>
+      <td>Filtered TableView, CRUD dialogs, question picker modal.</td>
+      <td>Create/edit quizzes, assign questions, publish, unpublish, archive.</td>
+    </tr>
+    <tr>
+      <td><strong>4. Question Bank</strong></td>
+      <td><code>QuestionManagementController</code><br><code>question_management.fxml</code></td>
+      <td>Question table, type selector, dynamic option forms.</td>
+      <td>Create/edit questions across all 4 types, filter by category/difficulty.</td>
+    </tr>
+    <tr>
+      <td><strong>5. Student Dashboard</strong></td>
+      <td><code>StudentDashboardController</code><br><code>student_dashboard.fxml</code></td>
+      <td>Available exams table, attempt counter, search bar.</td>
+      <td>Discover published quizzes, verify attempt limits, launch exam session.</td>
+    </tr>
+    <tr>
+      <td><strong>6. Quiz Attempt Screen</strong></td>
+      <td><code>QuizAttemptController</code><br><code>quiz_attempt.fxml</code></td>
+      <td>Live countdown timer, question palette, dynamic answer input.</td>
+      <td>Navigate questions, select options, enter text, voluntary/auto submit.</td>
+    </tr>
+    <tr>
+      <td><strong>7. Result View Screen</strong></td>
+      <td><code>ResultController</code><br><code>result.fxml</code></td>
+      <td>Score summary card, percentage badge, solution breakdown table.</td>
+      <td>Inspect awarded marks, view correct answers, return to dashboard.</td>
+    </tr>
+    <tr>
+      <td><strong>8. Reports & Analytics</strong></td>
+      <td><code>ReportsController</code><br><code>reports.fxml</code></td>
+      <td>Exam selector ComboBox, stats cards, leaderboard table.</td>
+      <td>Teacher aggregate analytics (avg, high, low scores) and student history.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- TESTING -->
+<div class="page-break"></div>
+<h1>8. Verification, Testing & Quality Assurance</h1>
+
+<p>
+The application includes a comprehensive automated test suite built on <strong>JUnit 5</strong> and <strong>Mockito</strong>. All tests execute independently of the file system through isolated memory fixtures and mocked repositories.
+</p>
+
+<h2>8.1 Test Suites Summary (60 Tests, 100% Pass Rate)</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 30%;">Test Suite</th>
+      <th style="width: 20%;">Target Component</th>
+      <th style="width: 12%;">Test Count</th>
+      <th style="width: 38%;">Verified Behaviors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>StandardScoringTest</code></td>
+      <td>Strategy Pattern</td>
+      <td>6</td>
+      <td>Perfect score, zero score, partial credit, empty answers, single correct.</td>
+    </tr>
+    <tr>
+      <td><code>NegativeMarkingScoringTest</code></td>
+      <td>Strategy Pattern</td>
+      <td>4</td>
+      <td>Penalty calculations, minimum floor at 0, custom penalty fractions.</td>
+    </tr>
+    <tr>
+      <td><code>TimeBasedScoringTest</code></td>
+      <td>Strategy Pattern</td>
+      <td>5</td>
+      <td>10% bonus (&lt;50% time), 5% bonus (&lt;75% time), total marks cap, untimed exams.</td>
+    </tr>
+    <tr>
+      <td><code>QuizStateTest</code></td>
+      <td>State Pattern</td>
+      <td>7</td>
+      <td>Valid transitions, illegal transition guards, editing/attempt permissions.</td>
+    </tr>
+    <tr>
+      <td><code>MCQQuestionTest</code></td>
+      <td>Question Domain</td>
+      <td>6</td>
+      <td>Correct option matching, incorrect rejection, correct answer display.</td>
+    </tr>
+    <tr>
+      <td><code>TrueFalseQuestionTest</code></td>
+      <td>Question Domain</td>
+      <td>6</td>
+      <td>Binary truth matching, case insensitivity, invalid input rejection.</td>
+    </tr>
+    <tr>
+      <td><code>FillBlankQuestionTest</code></td>
+      <td>Question Domain</td>
+      <td>5</td>
+      <td>Exact string match, case insensitivity, whitespace trimming.</td>
+    </tr>
+    <tr>
+      <td><code>MultipleAnswerQuestionTest</code></td>
+      <td>Question Domain</td>
+      <td>5</td>
+      <td>Exact set matching, rejection of partial selections, extra choice penalty.</td>
+    </tr>
+    <tr>
+      <td><code>QuizServiceTest</code></td>
+      <td>Service & Mocks</td>
+      <td>6</td>
+      <td>Quiz CRUD, zero-question publish guard, state updates, repo delegation.</td>
+    </tr>
+    <tr>
+      <td><code>AttemptServiceTest</code></td>
+      <td>Service & Mocks</td>
+      <td>5</td>
+      <td>Attempt eligibility, max attempt enforcement, scoring, timeout finalization.</td>
+    </tr>
+    <tr>
+      <td><code>AuthenticationServiceTest</code></td>
+      <td>Service & Mocks</td>
+      <td>5</td>
+      <td>Login validation, registration, duplicate email check, session state.</td>
+    </tr>
+    <tr style="font-weight: bold; background-color: #eff6ff;">
+      <td>Total Test Coverage</td>
+      <td>All Core Modules</td>
+      <td>60</td>
+      <td>BUILD SUCCESS &bull; 0 Failures &bull; 0 Errors &bull; 0 Skipped</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-title">Maven Surefire Test Runner Output</div>
+  <code>[INFO] Tests run: 60, Failures: 0, Errors: 0, Skipped: 0 &mdash; BUILD SUCCESS [Total time: 29.1s]</code>
+</div>
+
+<!-- GIT WORKFLOW & TEAM CONTRIBUTION -->
+<div class="page-break"></div>
+<h1>9. Collaborative Git Workflow & Team Contribution</h1>
+
+<h2>9.1 Professional Branching Model</h2>
+<p>
+In strict accordance with the teacher's instructions, all significant features were isolated on dedicated feature branches before integration into <code>main</code>:
+</p>
+<ul>
+  <li><code>feature/ui-views-and-controllers</code> &mdash; Developed by Md. Rokib Ikbal (1605), containing all 8 JavaFX controllers and FXML layouts.</li>
+  <li><code>feature/unit-testing-suite</code> &mdash; Developed by Md. Shourov (1609), containing the 60 JUnit 5 & Mockito unit test cases.</li>
+  <li><code>feature/architecture-documentation</code> &mdash; Developed by Md. Rokib Ikbal (1605), containing UML class diagrams, database ER diagram, and design decision rationale.</li>
+</ul>
+
+<h2>9.2 Individual Contribution Breakdown</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Team Member</th>
+      <th style="width: 35%;">Module Ownership & Responsibilities</th>
+      <th style="width: 40%;">Key Commits & Deliverables</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>Md. Shourov</strong><br>
+        <span style="font-size: 8pt; color: #64748b;">Roll: 1609 &bull; @Shourov735</span>
+      </td>
+      <td>
+        <ul>
+          <li>Database connection manager singleton & SQLite schema DDL and sample seeder.</li>
+          <li>Core domain entities, relationships, and lifecycle enums.</li>
+          <li>Core GoF design pattern implementations: Strategy (Scoring), State (Lifecycle), Factory Method, Observer.</li>
+          <li>Service layer business logic (Auth, Quiz, Question, Attempt, Reporting).</li>
+          <li>Comprehensive JUnit 5 & Mockito test suite (60 automated unit tests).</li>
+          <li>Technical documentation PDF and HTML report generation.</li>
+          <li>Peer code review and feature branch integration merges.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>DatabaseConnection.java</code>, <code>schema.sql</code>, <code>seed.sql</code></li>
+          <li><code>com.quizapp.model.*</code> (13 entity & enum files)</li>
+          <li><code>com.quizapp.scoring.*</code>, <code>state.*</code>, <code>factory.*</code>, <code>observer.*</code> (22 pattern files)</li>
+          <li><code>com.quizapp.service.*</code> (6 business service files)</li>
+          <li><code>feature/unit-testing-suite</code> branch (60 tests)</li>
+          <li><code>feature/technical-documentation-report</code> branch</li>
+          <li>Integration merges: UI and Architecture branches into <code>main</code>.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Md. Rokib Ikbal</strong><br>
+        <span style="font-size: 8pt; color: #64748b;">Roll: 1605 &bull; @Rokib1605</span>
+      </td>
+      <td>
+        <ul>
+          <li>Maven project configuration and build lifecycle dependencies.</li>
+          <li>Repository interfaces and SQLite JDBC data access implementations.</li>
+          <li>Application entry point, screen switcher, and modern CSS theme system.</li>
+          <li>Session context and UI dialog alert utilities (<code>SessionContext</code>, <code>AlertHelper</code>).</li>
+          <li>Full presentation layer: 8 JavaFX FXML screen layouts and controller bindings.</li>
+          <li>Architecture documentation: UML Class Diagrams, Database ER Diagram, and Design Decisions document.</li>
+          <li>Peer code review and feature branch integration merges.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><code>pom.xml</code> Maven build configuration</li>
+          <li><code>com.quizapp.repository.*</code> (12 repository files)</li>
+          <li><code>Main.java</code>, <code>SessionContext.java</code>, <code>AlertHelper.java</code>, <code>style.css</code></li>
+          <li><code>src/main/resources/fxml/*.fxml</code> (8 screen layouts)</li>
+          <li><code>com.quizapp.controller.*</code> (8 controllers)</li>
+          <li><code>docs/uml/class-diagram.md</code>, <code>database-er.md</code>, <code>design-patterns.md</code></li>
+          <li><code>feature/ui-views-and-controllers</code>, <code>feature/architecture-documentation</code></li>
+          <li>Integration merges: Unit Testing and Technical Documentation branches into <code>main</code>.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- VIVA DEFENSE GUIDE -->
+<div class="page-break"></div>
+<h1>10. Viva Defense & Demonstration Guide</h1>
+
+<p>
+This section prepares both team members for the oral examination and project demonstration:
+</p>
+
+<div class="callout-info">
+  <div class="callout-title">Q1: Why did you use Strategy for scoring instead of polymorphism on Quiz?</div>
+  <p><strong>Answer:</strong> A quiz varies across multiple independent dimensions: scoring strategy (Standard, Negative, Time-based), time constraints (timed vs untimed), and question ordering (shuffled vs fixed). Subclassing <code>Quiz</code> to vary scoring creates class explosion (e.g., <code>NegativeMarkingTimedShuffledQuiz</code>). Strategy encapsulates the scoring algorithm into an interchangeable object, enabling new grading algorithms to be added without touching the quiz entity.</p>
+</div>
+
+<div class="callout-info">
+  <div class="callout-title">Q2: How does the State Pattern prevent bugs compared to a status enum?</div>
+  <p><strong>Answer:</strong> With a status enum and switch statements, validation logic is scattered across every service method, making it easy to forget checking status before mutating data. In our State Pattern, each state class encapsulates allowed operations and throws an <code>IllegalStateException</code> if an invalid action is attempted (e.g., <code>DraftState.canBeAttempted() == false</code>; <code>ArchivedState.publish()</code> throws). Invalid operations fail immediately at the domain layer.</p>
+</div>
+
+<div class="callout-info">
+  <div class="callout-title">Q3: How is the Factory Method Pattern utilized when loading questions from SQLite?</div>
+  <p><strong>Answer:</strong> When querying the <code>questions</code> table, the application reads the <code>question_type</code> column. <code>QuestionFactory.createFromResultSet(rs)</code> inspects this value and instantiates the correct subclass (<code>MCQQuestion</code>, <code>TrueFalseQuestion</code>, etc.). The repository operates purely on the <code>Question</code> abstraction without needing to know subclass constructors.</p>
+</div>
+
+<div class="callout-info">
+  <div class="callout-title">Q4: Why is your use of the Singleton Pattern justified in an academic project?</div>
+  <p><strong>Answer:</strong> In our project, Singleton is used strictly for the <code>DatabaseConnection</code> manager to coordinate access to the single embedded SQLite file and prevent <code>SQLITE_BUSY</code> lock errors. We consciously avoided Singletons for business services, repositories, and controllers, opting for constructor dependency injection to ensure testability with Mockito.</p>
+</div>
+
+<div class="callout-info">
+  <div class="callout-title">Q5: How did you ensure testability of services without depending on SQLite?</div>
+  <p><strong>Answer:</strong> We applied the Repository Pattern and Dependency Inversion Principle (DIP). Services accept repository interfaces rather than concrete SQLite classes. In our JUnit 5 tests (e.g., <code>QuizServiceTest</code>), we inject Mockito mocks (<code>@Mock QuizRepository</code>), allowing service business rules to be tested in isolation in milliseconds without database I/O.</p>
+</div>
+
+<h2>10.1 Live Demonstration Sequence for Examiners</h2>
+<ol>
+  <li><strong>Launch Application:</strong> <code>java -jar target/quiz-management-system-1.0-SNAPSHOT.jar</code> &rarr; Database initialized & seeded.</li>
+  <li><strong>Teacher Workflow:</strong> Log in as <code>teacher@quiz.com</code> / <code>teacher123</code> &rarr; View dashboard &rarr; Create new quiz &rarr; Add questions &rarr; Publish quiz.</li>
+  <li><strong>Student Workflow:</strong> Log in as <code>student1@quiz.com</code> / <code>student123</code> &rarr; Start quiz &rarr; Answer questions &rarr; Submit &rarr; Review score breakdown.</li>
+  <li><strong>Analytics:</strong> Log back in as Teacher &rarr; View quiz reports &rarr; Inspect updated leaderboard.</li>
+  <li><strong>Automated Testing:</strong> Execute <code>mvn test</code> in terminal &rarr; Demonstrate 60 passing JUnit 5 tests.</li>
+</ol>
+
+<!-- CONCLUSION -->
+<div class="page-break"></div>
+<h1>11. Conclusion & Repository Verification</h1>
+
+<p>
+The <strong>Quiz Management & Examination System</strong> represents an extensible, production-ready desktop application that thoroughly satisfies all requirements of the Design Patterns Theory and Lab final project. The software demonstrates:
+</p>
+<ul>
+  <li>Clean separation of concerns across presentation, business services, domain models, and persistence.</li>
+  <li>Meaningful application of four Gang-of-Four design patterns (Strategy, State, Factory Method, Observer) alongside justified Singleton and Repository patterns.</li>
+  <li>Reliable relational persistence in SQLite with referential integrity, constraints, and indexes.</li>
+  <li>High software quality proven through 60 automated unit tests (100% passing).</li>
+  <li>Disciplined collaborative Git workflow with feature branches, PR merges, and balanced team member contributions.</li>
+</ul>
+
+<h2>11.1 Official Repository & Artifact Metadata</h2>
+<table>
+  <tr>
+    <th style="width: 30%;">Item</th>
+    <th style="width: 70%;">Details</th>
+  </tr>
+  <tr>
+    <td><strong>GitHub Repository URL</strong></td>
+    <td><a href="https://github.com/Shourov735/Quiz-Management-and-Examination-System" style="color:#1d4ed8; text-decoration:none; font-weight:bold;">https://github.com/Shourov735/Quiz-Management-and-Examination-System</a></td>
+  </tr>
+  <tr>
+    <td><strong>Repository Visibility</strong></td>
+    <td>Public &bull; Accessible for Academic Evaluation</td>
+  </tr>
+  <tr>
+    <td><strong>Active Git Branches</strong></td>
+    <td><code>main</code>, <code>feature/ui-views-and-controllers</code>, <code>feature/unit-testing-suite</code>, <code>feature/architecture-documentation</code></td>
+  </tr>
+  <tr>
+    <td><strong>Executable Artifact</strong></td>
+    <td>Pre-built shaded fat JAR generated via <code>mvn clean package</code> (in <code>target/</code>)</td>
+  </tr>
+  <tr>
+    <td><strong>Technical Documentation PDF</strong></td>
+    <td><code>Quiz_Management_System_Technical_Documentation.pdf</code> (in project root and <code>docs/</code>)</td>
+  </tr>
+  <tr>
+    <td><strong>Project Team</strong></td>
+    <td>Md. Shourov (Roll: 1609) &bull; Md. Rokib Ikbal (Roll: 1605) &bull; IIT, University of Dhaka</td>
+  </tr>
+</table>
+
+</body>
+</html>
