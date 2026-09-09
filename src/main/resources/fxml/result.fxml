@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.ResultController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label text="Examination Results &amp; Review" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="← Back to Dashboard" onAction="#handleBackToDashboard" styleClass="button-outline" style="-fx-text-fill: white; -fx-border-color: white;"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <VBox spacing="20" alignment="TOP_CENTER">
+                <padding>
+                    <Insets top="25" right="35" bottom="30" left="35"/>
+                </padding>
+
+                <!-- Score Card Banner -->
+                <VBox fx:id="scoreCardBox" alignment="CENTER" spacing="8" styleClass="result-score-box" maxWidth="600" prefWidth="600">
+                    <Label fx:id="quizTitleLabel" text="Quiz Title" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <Label fx:id="scoreNumberLabel" text="0.0 / 0.0" styleClass="result-score-number"/>
+                    <Label fx:id="percentageLabel" text="0% Score" styleClass="result-score-sub"/>
+                    <Label fx:id="statusBadge" text="SUBMITTED" style="-fx-background-color: rgba(255,255,255,0.25); -fx-text-fill: white; -fx-padding: 4 12; -fx-background-radius: 4; -fx-font-size: 12px;"/>
+                </VBox>
+
+                <!-- Breakdown Row -->
+                <HBox spacing="16" alignment="CENTER" maxWidth="600">
+                    <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <Label fx:id="correctCountLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #27ae60;"/>
+                        <Label text="Correct Answers" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <Label fx:id="wrongCountLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #e74c3c;"/>
+                        <Label text="Incorrect Answers" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <Label fx:id="timeSpentLabel" text="--:--" styleClass="stat-number" style="-fx-text-fill: #3498db; -fx-font-size: 24px;"/>
+                        <Label text="Time Taken" styleClass="stat-label"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Detailed Question Review Section -->
+                <VBox spacing="10" maxWidth="800" prefWidth="800">
+                    <Label text="Detailed Answer Breakdown &amp; Solutions" styleClass="label-subtitle"/>
+                    <TableView fx:id="reviewTable" prefHeight="280">
+                        <columns>
+                            <TableColumn fx:id="qNumberCol" text="#" prefWidth="40"/>
+                            <TableColumn fx:id="questionCol" text="Question" prefWidth="300"/>
+                            <TableColumn fx:id="studentAnswerCol" text="Your Answer" prefWidth="170"/>
+                            <TableColumn fx:id="correctAnswerCol" text="Correct Solution" prefWidth="180"/>
+                            <TableColumn fx:id="marksCol" text="Marks" prefWidth="80"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No answers recorded."/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <!-- Bottom Button -->
+                <HBox spacing="14" alignment="CENTER">
+                    <Button text="Return to Student Dashboard" onAction="#handleBackToDashboard" styleClass="button-success" style="-fx-padding: 10 24; -fx-font-weight: bold;"/>
+                    <Button text="View All Analytics &amp; Reports" onAction="#handleViewReports" styleClass="button-secondary"/>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.ReportsController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Back to Dashboard" onAction="#handleBack" styleClass="button-outline" style="-fx-text-fill: white; -fx-border-color: white;"/>
+            <Label text="Analytics &amp; Examination Reports" styleClass="top-bar-title"/>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <TabPane fx:id="reportsTabPane" tabClosingPolicy="UNAVAILABLE">
+            <!-- Tab 1: Quiz Analytics & Leaderboard -->
+            <Tab text="Quiz Performance Analytics">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="18">
+                        <padding>
+                            <Insets top="20" right="30" bottom="25" left="30"/>
+                        </padding>
+
+                        <!-- Quiz Selection Row -->
+                        <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 14; -fx-background-radius: 8; -fx-border-color: #dee2e6; -fx-border-radius: 8;">
+                            <Label text="Select Examination:" style="-fx-font-weight: bold;"/>
+                            <ComboBox fx:id="quizSelector" prefWidth="300"/>
+                            <Button text="Refresh Analytics" onAction="#handleRefreshQuizReport" styleClass="button"/>
+                        </HBox>
+
+                        <!-- Analytics Stat Cards -->
+                        <HBox spacing="16">
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="quizAttemptsCountLabel" text="0" styleClass="stat-number"/>
+                                <Label text="Total Attempts" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="quizAvgScoreLabel" text="0.0" styleClass="stat-number" style="-fx-text-fill: #3498db;"/>
+                                <Label text="Average Score" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="quizHighestScoreLabel" text="0.0" styleClass="stat-number" style="-fx-text-fill: #27ae60;"/>
+                                <Label text="Highest Score" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="quizLowestScoreLabel" text="0.0" styleClass="stat-number" style="-fx-text-fill: #e74c3c;"/>
+                                <Label text="Lowest Score" styleClass="stat-label"/>
+                            </VBox>
+                        </HBox>
+
+                        <!-- Quiz Leaderboard Table -->
+                        <VBox spacing="10">
+                            <Label text="Student Attempts &amp; Leaderboard" styleClass="label-subtitle"/>
+                            <TableView fx:id="leaderboardTable" prefHeight="300">
+                                <columns>
+                                    <TableColumn fx:id="rankCol" text="Rank" prefWidth="50"/>
+                                    <TableColumn fx:id="attemptIdCol" text="Attempt #" prefWidth="85"/>
+                                    <TableColumn fx:id="studentCol" text="Student ID" prefWidth="120"/>
+                                    <TableColumn fx:id="scoreCol" text="Score" prefWidth="100"/>
+                                    <TableColumn fx:id="totalMarksCol" text="Total Marks" prefWidth="100"/>
+                                    <TableColumn fx:id="percentageCol" text="Percentage" prefWidth="110"/>
+                                    <TableColumn fx:id="statusCol" text="Status" prefWidth="120"/>
+                                    <TableColumn fx:id="dateCol" text="Date Submitted" prefWidth="160"/>
+                                </columns>
+                                <placeholder>
+                                    <Label text="No attempts recorded for this quiz yet."/>
+                                </placeholder>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- Tab 2: Student Overall Performance -->
+            <Tab fx:id="studentTab" text="Student Performance History">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="18">
+                        <padding>
+                            <Insets top="20" right="30" bottom="25" left="30"/>
+                        </padding>
+
+                        <HBox spacing="16">
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="studentTotalAttemptsLabel" text="0" styleClass="stat-number"/>
+                                <Label text="Examinations Taken" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="studentCompletedCountLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #27ae60;"/>
+                                <Label text="Completed Examinations" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="studentOverallAvgLabel" text="0.0" styleClass="stat-number" style="-fx-text-fill: #3498db;"/>
+                                <Label text="Average Score" styleClass="stat-label"/>
+                            </VBox>
+                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                <Label fx:id="studentOverallPctLabel" text="0.0%" styleClass="stat-number" style="-fx-text-fill: #8e44ad;"/>
+                                <Label text="Overall Accuracy" styleClass="stat-label"/>
+                            </VBox>
+                        </HBox>
+
+                        <VBox spacing="10">
+                            <Label text="Complete Examination History" styleClass="label-subtitle"/>
+                            <TableView fx:id="studentHistoryTable" prefHeight="300">
+                                <columns>
+                                    <TableColumn fx:id="histAttemptIdCol" text="Attempt #" prefWidth="90"/>
+                                    <TableColumn fx:id="histQuizCol" text="Examination Quiz" prefWidth="250"/>
+                                    <TableColumn fx:id="histScoreCol" text="Score" prefWidth="120"/>
+                                    <TableColumn fx:id="histStatusCol" text="Status" prefWidth="120"/>
+                                    <TableColumn fx:id="histDateCol" text="Date Taken" prefWidth="180"/>
+                                </columns>
+                                <placeholder>
+                                    <Label text="No examination history available."/>
+                                </placeholder>
+                            </TableView>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+        </TabPane>
+    </center>
+
+</BorderPane>

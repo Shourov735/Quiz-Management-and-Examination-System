@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.quizapp.controller.TeacherDashboardController">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label text="Quiz Management System" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="welcomeLabel" text="Welcome, Teacher" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="button-danger" style="-fx-font-size: 12px;"/>
+        </HBox>
+    </top>
+
+    <!-- Sidebar Navigation -->
+    <left>
+        <VBox spacing="4" styleClass="nav-sidebar">
+            <Button text="📊 Dashboard" styleClass="nav-button, nav-button-active" prefWidth="200"/>
+            <Button text="📝 My Quizzes" onAction="#showQuizManagement" styleClass="nav-button" prefWidth="200"/>
+            <Button text="❓ Question Bank" onAction="#showQuestionManagement" styleClass="nav-button" prefWidth="200"/>
+            <Button text="📈 Examination Reports" onAction="#showReports" styleClass="nav-button" prefWidth="200"/>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <VBox spacing="24">
+                <padding>
+                    <Insets top="25" right="30" bottom="25" left="30"/>
+                </padding>
+
+                <!-- Page Header -->
+                <VBox spacing="4">
+                    <Label text="Teacher Dashboard" styleClass="label-title"/>
+                    <Label text="Overview of examination status, quizzes, and student participation." styleClass="label-muted"/>
+                </VBox>
+
+                <!-- Stat Cards Row -->
+                <HBox spacing="18">
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label fx:id="totalQuizzesLabel" text="0" styleClass="stat-number"/>
+                        <Label text="Total Quizzes" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label fx:id="publishedQuizzesLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #27ae60;"/>
+                        <Label text="Published Quizzes" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label fx:id="totalQuestionsLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #8e44ad;"/>
+                        <Label text="Question Bank Items" styleClass="stat-label"/>
+                    </VBox>
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                        <Label fx:id="totalAttemptsLabel" text="0" styleClass="stat-number" style="-fx-text-fill: #e67e22;"/>
+                        <Label text="Student Attempts" styleClass="stat-label"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Quick Action Buttons -->
+                <HBox spacing="12">
+                    <Button text="+ Create New Quiz" onAction="#showQuizManagement" styleClass="button-success"/>
+                    <Button text="+ Add Questions" onAction="#showQuestionManagement" styleClass="button"/>
+                    <Button text="View Detailed Analytics" onAction="#showReports" styleClass="button-secondary"/>
+                </HBox>
+
+                <!-- Recent Quizzes Section -->
+                <VBox spacing="10">
+                    <Label text="My Recent Quizzes" styleClass="label-subtitle"/>
+                    <TableView fx:id="recentQuizzesTable" prefHeight="260">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="titleColumn" text="Title" prefWidth="250"/>
+                            <TableColumn fx:id="difficultyColumn" text="Difficulty" prefWidth="100"/>
+                            <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+                            <TableColumn fx:id="strategyColumn" text="Scoring Strategy" prefWidth="140"/>
+                            <TableColumn fx:id="timeLimitColumn" text="Time (mins)" prefWidth="90"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No quizzes created yet. Click 'Create New Quiz' to begin!"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
