@@ -1,0 +1,345 @@
+/* ============================================================
+   Quiz Management & Examination System — Main Stylesheet
+   ============================================================ */
+
+/* ---- Root / Global ---------------------------------------- */
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #f5f6fa;
+}
+
+/* ---- Buttons ---------------------------------------------- */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+.button:pressed {
+    -fx-background-color: #1f6fa8;
+}
+
+/* Danger / delete button */
+.button-danger {
+    -fx-background-color: #e74c3c;
+}
+.button-danger:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* Success / confirm button */
+.button-success {
+    -fx-background-color: #27ae60;
+}
+.button-success:hover {
+    -fx-background-color: #219150;
+}
+
+/* Secondary / neutral button */
+.button-secondary {
+    -fx-background-color: #95a5a6;
+}
+.button-secondary:hover {
+    -fx-background-color: #7f8c8d;
+}
+
+/* Outline / back button */
+.button-outline {
+    -fx-background-color: transparent;
+    -fx-border-color: #3498db;
+    -fx-border-width: 1.5;
+    -fx-text-fill: #3498db;
+}
+.button-outline:hover {
+    -fx-background-color: #eaf4fb;
+}
+
+/* ---- Labels ----------------------------------------------- */
+.label-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.label-subtitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+.label-error {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+}
+
+.label-success {
+    -fx-text-fill: #27ae60;
+    -fx-font-size: 12px;
+}
+
+.label-muted {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 12px;
+}
+
+/* ---- Text Fields ------------------------------------------ */
+.text-field, .password-field, .text-area {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 7 10 7 10;
+    -fx-font-size: 13px;
+}
+.text-field:focused, .password-field:focused, .text-area:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 1.5;
+}
+
+/* ---- ComboBox --------------------------------------------- */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.combo-box:focused {
+    -fx-border-color: #3498db;
+}
+
+/* ---- TableView -------------------------------------------- */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.table-view .column-header {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 8 10 8;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.table-row-cell {
+    -fx-background-color: white;
+}
+.table-row-cell:odd {
+    -fx-background-color: #f8f9fa;
+}
+.table-row-cell:selected {
+    -fx-background-color: #d0e8f7;
+    -fx-text-fill: #2c3e50;
+}
+.table-row-cell:hover {
+    -fx-background-color: #eaf4fb;
+}
+
+/* ---- Navigation Sidebar ----------------------------------- */
+.nav-sidebar {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 10 0 10 0;
+    -fx-min-width: 200px;
+}
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20 12 20;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+}
+.nav-button:hover {
+    -fx-background-color: #3d5166;
+    -fx-text-fill: white;
+}
+.nav-button-active {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+/* ---- Top Bar / Header ------------------------------------- */
+.top-bar {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 12 20 12 20;
+}
+.top-bar .label {
+    -fx-text-fill: white;
+}
+.top-bar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ---- Stat Cards ------------------------------------------- */
+.stat-card {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 16;
+    -fx-min-width: 150px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+.stat-number {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3498db;
+}
+.stat-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* ---- Login Panel ------------------------------------------ */
+.login-panel {
+    -fx-background-color: white;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);
+    -fx-max-width: 460;
+    -fx-min-width: 380;
+}
+.login-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+.login-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* ---- Quiz Status Badges ----------------------------------- */
+.badge-draft {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+    -fx-font-size: 11px;
+}
+.badge-published {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+    -fx-font-size: 11px;
+}
+.badge-archived {
+    -fx-background-color: #95a5a6;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+    -fx-font-size: 11px;
+}
+
+/* ---- Quiz Attempt Screen ---------------------------------- */
+.question-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-wrap-text: true;
+}
+.timer-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e74c3c;
+}
+.timer-label-normal {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #27ae60;
+}
+.answer-option {
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+}
+.nav-q-button {
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-max-width: 36px;
+    -fx-max-height: 36px;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-font-size: 12px;
+}
+.nav-q-answered {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+.nav-q-current {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+.nav-q-unanswered {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-text-fill: #2c3e50;
+}
+
+/* ---- Result Screen ---------------------------------------- */
+.result-score-box {
+    -fx-background-color: #3498db;
+    -fx-background-radius: 12;
+    -fx-padding: 30;
+    -fx-alignment: center;
+}
+.result-score-number {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.result-score-sub {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255,255,255,0.85);
+}
+.result-pass {
+    -fx-background-color: #27ae60;
+}
+.result-fail {
+    -fx-background-color: #e74c3c;
+}
+
+/* ---- Separator -------------------------------------------- */
+.separator {
+    -fx-border-color: #dee2e6;
+}
+
+/* ---- Tab Pane --------------------------------------------- */
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: #ecf0f1;
+    -fx-padding: 8 20 8 20;
+}
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: white;
+}
+.tab-pane .tab-header-area .tab .tab-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* ---- Scroll Pane ------------------------------------------ */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
