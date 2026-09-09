@@ -93,15 +93,43 @@ public class QuestionFactory {
 
         Question question = createQuestion(type);
         question.setId(rs.getInt("id"));
-        question.setQuizId(rs.getInt("quiz_id"));
         question.setQuestionText(rs.getString("question_text"));
         question.setMarks(rs.getDouble("marks"));
-        question.setDisplayOrder(rs.getInt("display_order"));
 
-        // FILL_BLANK stores its answer directly on the question row
+        try {
+            String diff = rs.getString("difficulty");
+            if (diff != null && !diff.isBlank()) {
+                question.setDifficulty(com.quizapp.model.Difficulty.valueOf(diff.toUpperCase()));
+            }
+        } catch (Exception ignored) {}
+
+        try {
+            question.setCategoryId(rs.getInt("category_id"));
+        } catch (SQLException ignored) {}
+
+        try {
+            question.setCreatedBy(rs.getInt("created_by"));
+        } catch (SQLException ignored) {}
+
+        try {
+            question.setQuizId(rs.getInt("quiz_id"));
+        } catch (SQLException ignored) {}
+
+        try {
+            question.setDisplayOrder(rs.getInt("question_order"));
+        } catch (SQLException ignored) {}
+
+        try {
+            question.setDisplayOrder(rs.getInt("display_order"));
+        } catch (SQLException ignored) {}
+
         if (type == QuestionType.FILL_BLANK) {
-            String correctAnswer = rs.getString("correct_answer");
-            ((FillBlankQuestion) question).setCorrectAnswer(correctAnswer);
+            try {
+                String correctAnswer = rs.getString("correct_answer");
+                if (correctAnswer != null) {
+                    ((FillBlankQuestion) question).setCorrectAnswer(correctAnswer);
+                }
+            } catch (SQLException ignored) {}
         }
 
         return question;
@@ -110,7 +138,7 @@ public class QuestionFactory {
     /**
      * Attaches a list of {@link QuestionOption}s to the given question.
      * <p>
-     * Replaces any previously set options.  This helper is called after the
+     * Replaces any previously set options. This helper is called after the
      * options have been loaded from the database (typically in a separate query).
      * </p>
      *
@@ -126,5 +154,13 @@ public class QuestionFactory {
             throw new IllegalArgumentException("Options list must not be null");
         }
         question.setOptions(options);
+        if (question instanceof FillBlankQuestion fb) {
+            for (QuestionOption opt : options) {
+                if (opt.isCorrect()) {
+                    fb.setCorrectAnswer(opt.getOptionText());
+                    break;
+                }
+            }
+        }
     }
 }
